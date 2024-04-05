@@ -6,11 +6,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Optional;
 import java.util.Scanner;
-import java.util.function.Consumer;
 
-import com.google.protobuf.Option;
 import com.inet_test1.AppConfig;
 
 import io.github.cdimascio.dotenv.Dotenv;
@@ -34,14 +31,14 @@ public class Mysql {
     }
 
     public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(drive + "://" + host + "/" + database, user, password);
+        return DriverManager.getConnection(drive + "://" + host + ":" + port + "/" + database, user, password);
     }
 
     public void runMigration(String file) {
         Connection conn = null;
         File queryFile = null;
         Scanner queryRead = null;
-        String query = "";        
+        String query = "";
 
         try {
             conn = getConnection();
