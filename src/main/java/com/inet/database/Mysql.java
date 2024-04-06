@@ -1,18 +1,14 @@
 package com.inet.database;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 import com.inet.AppConfig;
 import com.inet.AppEnv;
 import com.inet.utils.FileUtils;
-
-import io.github.cdimascio.dotenv.Dotenv;
 
 public class Mysql {
     private final String drive;
