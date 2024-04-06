@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.inet.AppConfig;
+import com.inet.AppEnv;
 import com.inet.utils.FileUtils;
 
 import io.github.cdimascio.dotenv.Dotenv;
@@ -22,23 +23,24 @@ public class Mysql {
     private final String password;
 
     public Mysql() {
-        Dotenv env = AppConfig.env;
-        drive = env.get("DB_DRIVE", "jdbc");
-        host = env.get("DB_HOST", "127.0.0.1");
-        port = env.get("DB_PORT", "3306");
-        database = env.get("DB_DATABASE");
-        user = env.get("DB_USER");
-        password = env.get("DB_PASSWORD");
+        AppEnv env = AppConfig.env;
+        drive = env.DB_DRIVE;
+        host = env.DB_HOST;
+        port = env.DB_PORT;
+        database = env.DB_DATABASE;
+        user = env.DB_USER;
+        password = env.DB_PASSWORD;
     }
 
     public Connection getConnection() throws SQLException {
+
         return DriverManager.getConnection(drive + "://" + host + ":" + port + "/" + database, user, password);
     }
 
     public void runMigration(String file) {
         try {
             Connection conn = getConnection();
-            String query = FileUtils.readAll(AppConfig.DIR_MIGRATIONS + "/" +file);
+            String query = FileUtils.readAll(AppConfig.env.DIR_MIGRATIONS + "/" + file);
 
             PreparedStatement statement = conn.prepareStatement(query);
 

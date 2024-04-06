@@ -20,7 +20,7 @@ public class ClientRepository {
         try {
             conn = mysql.getConnection();
 
-            String query = FileUtils.readAll(AppConfig.DIR_QUERY + "/client-query/client-insert.sql");
+            String query = FileUtils.readAll(AppConfig.env.DIR_QUERY + "/client-query/client-insert.sql");
             PreparedStatement statement = conn.prepareStatement(query);
 
             statement.setString(1, data.name);
