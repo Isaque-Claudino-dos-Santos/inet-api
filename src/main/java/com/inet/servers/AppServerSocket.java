@@ -12,6 +12,9 @@ public class AppServerSocket {
 
     public AppServerSocket() {
         port = AppConfig.env.SOCKET_PORT;
+    }
+
+    public void connect() {
         try {
             serverSocket = new ServerSocket(port);
             handleSocket();
