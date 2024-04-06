@@ -11,7 +11,7 @@ public class AppServerSocket {
     private Integer port;
 
     public AppServerSocket() {
-        port = Integer.parseInt(AppConfig.env.SOCKET_PORT);
+        port = AppConfig.env.SOCKET_PORT;
         try {
             serverSocket = new ServerSocket(port);
             handleSocket();

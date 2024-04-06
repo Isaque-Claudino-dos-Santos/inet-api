@@ -14,7 +14,7 @@ public class AppEnv {
     public final String DB_DRIVE = env.get("DB_DRIVE", "jdbc:mysql");
 
     // socket
-    public final String SOCKET_PORT = env.get("SOCKET_PORT", "3000");
+    public final Integer SOCKET_PORT = Integer.parseInt(env.get("SOCKET_PORT", "3000"));
 
     // directory
     public final String DIR_ROOT = "src/main/java/com/inet";
