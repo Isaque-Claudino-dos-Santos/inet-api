@@ -15,10 +15,8 @@ public class ClientRepository {
     static private final Mysql mysql = new Mysql();
 
     static public void save(ClientModel data) {
-        Connection conn = null;
-
         try {
-            conn = mysql.getConnection();
+            Connection conn = mysql.getConnection();
 
             String query = FileUtils.readAll(AppConfig.env.DIR_QUERY + "/client-query/client-insert.sql");
             PreparedStatement statement = conn.prepareStatement(query);
