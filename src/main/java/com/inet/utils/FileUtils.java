@@ -1,4 +1,4 @@
-package com.inet_test1.utils;
+package com.inet.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +11,7 @@ public class FileUtils {
     }
 
     public static String readAll(String path) throws FileNotFoundException {
-        String fileText = null;
+        String fileText = "";
         Scanner file = scannerFile(path);
 
         while (file.hasNextLine()) {

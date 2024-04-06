@@ -1,8 +1,8 @@
-package com.inet_test1;
+package com.inet;
 
-import com.inet_test1.database.Mysql;
-import com.inet_test1.models.ClientModel;
-import com.inet_test1.repositories.ClientRepository;
+import com.inet.database.Mysql;
+import com.inet.models.ClientModel;
+import com.inet.repositories.ClientRepository;
 
 public class App {
     static final Mysql mysql = new Mysql();

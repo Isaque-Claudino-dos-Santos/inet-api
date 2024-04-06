@@ -1,4 +1,4 @@
-package com.inet_test1.models;
+package com.inet.models;
 
 public class ClientModel {
     public String name;

@@ -1,4 +1,4 @@
-package com.inet_test1.database;
+package com.inet.database;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,8 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.inet_test1.AppConfig;
-import com.inet_test1.utils.FileUtils;
+import com.inet.AppConfig;
+import com.inet.utils.FileUtils;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -38,8 +38,7 @@ public class Mysql {
     public void runMigration(String file) {
         try {
             Connection conn = getConnection();
-            String rootDir = "src/main/java/com/inet_test1/database/migrations/";
-            String query = FileUtils.readAll(rootDir + file);
+            String query = FileUtils.readAll(AppConfig.DIR_MIGRATIONS + "/" +file);
 
             PreparedStatement statement = conn.prepareStatement(query);
 
