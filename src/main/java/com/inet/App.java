@@ -1,21 +1,13 @@
 package com.inet;
 
 import com.inet.database.Mysql;
-import com.inet.models.ClientModel;
-import com.inet.repositories.ClientRepository;
+import com.inet.servers.AppServerSocket;
 
 public class App {
     static final Mysql mysql = new Mysql();
+    static final AppServerSocket appServerSocket = new AppServerSocket();
 
     public static void main(String[] args) {
         mysql.runAllMigrations(AppConfig.migrations);
-
-        ClientModel client = new ClientModel();
-        client.name = "Test";
-        client.systemArch = "32 bits";
-        client.systemName = "Windowns";
-        client.systemVersion = "16.2";
-
-        ClientRepository.save(client);
     }
 }

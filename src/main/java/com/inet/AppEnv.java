@@ -13,6 +13,9 @@ public class AppEnv {
     public final String DB_PORT = env.get("DB_PORT", "3306");
     public final String DB_DRIVE = env.get("DB_DRIVE", "jdbc:mysql");
 
+    // socket
+    public final String SOCKET_PORT = env.get("SOCKET_PORT", "3000");
+
     // directory
     public final String DIR_ROOT = "src/main/java/com/inet";
     public final String DIR_DATABASE = DIR_ROOT + "/database";
