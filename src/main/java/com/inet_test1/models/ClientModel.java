@@ -1,10 +1,10 @@
 package com.inet_test1.models;
 
 public class ClientModel {
-    String name;
-    String systemName;
-    String systemArch;
-    String systemVersion;
+    public String name;
+    public String systemName;
+    public String systemArch;
+    public String systemVersion;
 
     @Override
     public String toString() {
