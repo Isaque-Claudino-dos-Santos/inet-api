@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.inet_test1.AppConfig;
+import com.inet_test1.utils.FileUtils;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -35,19 +36,10 @@ public class Mysql {
     }
 
     public void runMigration(String file) {
-        Connection conn = null;
-        File queryFile = null;
-        Scanner queryRead = null;
-        String query = "";
-
         try {
-            conn = getConnection();
-            queryFile = new File("src/main/java/com/inet_test1/database/migrations/" + file);
-            queryRead = new Scanner(queryFile);
-
-            while (queryRead.hasNextLine()) {
-                query += queryRead.nextLine();
-            }
+            Connection conn = getConnection();
+            String rootDir = "src/main/java/com/inet_test1/database/migrations/";
+            String query = FileUtils.readAll(rootDir + file);
 
             PreparedStatement statement = conn.prepareStatement(query);
 
@@ -58,8 +50,6 @@ public class Mysql {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        queryRead.close();
     }
 
     public void runAllMigrations(String[] migrations) {
