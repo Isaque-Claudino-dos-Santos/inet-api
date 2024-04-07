@@ -1,6 +1,7 @@
 package com.inet;
 
 import com.inet.database.Mysql;
+import com.inet.enums.UserTypeEnum;
 import com.inet.models.ClientModel;
 import com.inet.repositories.ClientRepository;
 import com.inet.servers.AppServerSocket;
@@ -13,12 +14,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class App extends Application {
-    static final Mysql mysql = new Mysql();
     static final AppServerSocket appServerSocket = new AppServerSocket();
 
     public static void main(String[] args) {
         launch();
-        mysql.runAllMigrations(AppConfig.migrations);
+        AppConfig.mysql.runAllMigrations(AppConfig.migrations);
 
         for (ClientModel client : ClientRepository.index()) {
             System.out.println(client);
