@@ -11,14 +11,14 @@ public enum UserTypeEnum {
         this.value = value;
     }
 
-    static public UserTypeEnum toEnum(String e) throws EnumNotFouldException {
-        for (UserTypeEnum value : values()) {
-            if (e == value.getValue()) {
-                return value;
+    static public UserTypeEnum toEnum(String value) throws EnumNotFouldException {
+        for (UserTypeEnum type : values()) {
+            if (value == type.getValue()) {
+                return type;
             }
         }
 
-        throw new EnumNotFouldException(e);
+        throw new EnumNotFouldException(value);
     }
 
     public String getValue() {

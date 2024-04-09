@@ -15,7 +15,7 @@ public class ClientRepository {
     static private final Mysql mysql = AppConfig.mysql;
     static private final String DIR_QUERY = AppConfig.env.DIR_QUERY + "/client-query";
 
-    static public ArrayList<ClientModel> index() {
+    static public ArrayList<ClientModel> findAll() {
         ArrayList<ClientModel> clients = new ArrayList<>();
 
         try {
