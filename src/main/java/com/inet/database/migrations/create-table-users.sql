@@ -3,5 +3,5 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR(60) NOT NULL,
     email VARCHAR(150) NOT NULL,
     password VARCHAR(430) NOT NULL,
-    type ENUM("client", "client-manager", "admin")
+    type ENUM("client", "client-manager", "admin") NOT NULL
 )
