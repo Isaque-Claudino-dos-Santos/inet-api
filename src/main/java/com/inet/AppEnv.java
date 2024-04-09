@@ -1,9 +1,14 @@
 package com.inet;
 
+import java.util.regex.Pattern;
+
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class AppEnv {
     private final Dotenv env = Dotenv.load();
+
+    // general
+    public final String JAVA_ENV = env.get("JAVA_ENV", "development");
 
     // database
     public final String DB_USER = env.get("DB_USER");
@@ -21,4 +26,7 @@ public class AppEnv {
     public final String DIR_DATABASE = DIR_ROOT + "/database";
     public final String DIR_QUERY = DIR_DATABASE + "/query";
     public final String DIR_MIGRATIONS = DIR_DATABASE + "/migrations";
+
+    // regex pattern
+    public final Pattern REGEX_EMAIL = Pattern.compile("^(\\w|\\.|-)*(@\\w*\\.\\w*)*$");
 }

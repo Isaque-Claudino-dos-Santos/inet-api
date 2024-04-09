@@ -1,25 +1,21 @@
 package com.inet.repositories;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import javax.naming.spi.DirStateFactory.Result;
-
 import com.inet.AppConfig;
 import com.inet.database.Mysql;
 import com.inet.models.ClientModel;
 import com.inet.utils.FileUtils;
 
 public class ClientRepository {
-    static private final Mysql mysql = new Mysql();
+    static private final Mysql mysql = AppConfig.mysql;
     static private final String DIR_QUERY = AppConfig.env.DIR_QUERY + "/client-query";
 
-    static public ArrayList<ClientModel> index() {
+    static public ArrayList<ClientModel> findAll() {
         ArrayList<ClientModel> clients = new ArrayList<>();
 
         try {
