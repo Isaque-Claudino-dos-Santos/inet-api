@@ -1,5 +1,5 @@
-package com.inet.server.http;
+package com.inet.http;
 
 public class Routes {
-    
+
 }
