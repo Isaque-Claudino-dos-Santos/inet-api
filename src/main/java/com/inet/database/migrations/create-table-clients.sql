@@ -1,7 +1,0 @@
-CREATE TABLE IF NOT EXISTS clients (
-    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    name VARCHAR(100) NOT NULL,
-    systemName VARCHAR(20) NOT NULL,
-    systemArch VARCHAR(20) NOT NULL,
-    systemVersion VARCHAR(100)  NOT NULL
-)
