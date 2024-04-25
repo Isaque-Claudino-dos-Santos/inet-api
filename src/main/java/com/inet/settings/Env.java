@@ -5,9 +5,6 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class Env {
     private final static Dotenv env = Dotenv.load();
 
-    // general
-    public final static String JAVA_ENV = env.get("JAVA_ENV", "development");
-
     // database
     public final static String DB_USER = env.get("DB_USER");
     public final static String DB_PASSWORD = env.get("DB_PASSWORD");
@@ -21,4 +18,7 @@ public class Env {
     public final static String DIR_DATABASE = DIR_ROOT + "/database";
     public final static String DIR_QUERY = DIR_DATABASE + "/query";
     public final static String DIR_MIGRATIONS = DIR_DATABASE + "/migrations";
+
+    // Http API
+    public final static Integer API_PORT = Integer.valueOf(env.get("API_PORT", "3000"));
 }
