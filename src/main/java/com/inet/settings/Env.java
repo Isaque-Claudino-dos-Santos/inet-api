@@ -18,4 +18,5 @@ public class Env {
 
     // Http API
     public final static Integer API_PORT = Integer.valueOf(env.get("API_PORT", "3000"));
+    public final static String API_HOST = env.get("API_HOST");
 }
