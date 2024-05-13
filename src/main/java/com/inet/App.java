@@ -1,11 +1,12 @@
 package com.inet;
 
 import com.inet.framework.servers.Server;
+import com.inet.settings.Env;
 import com.inet.settings.Kernel;
 
 public class App {
     public static void main(String[] args) {
-        Server server = new Server();
+        Server server = new Server(Env.API_HOST, Env.API_PORT);
 
         Kernel kernel = new Kernel(server);
 

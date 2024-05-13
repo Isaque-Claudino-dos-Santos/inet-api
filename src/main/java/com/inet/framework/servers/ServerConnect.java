@@ -1,7 +1,10 @@
 package com.inet.framework.servers;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
+
 import com.sun.net.httpserver.*;
 import com.inet.framework.servers.contracts.ServerConnectInterface;
 
@@ -15,17 +18,19 @@ public class ServerConnect implements ServerConnectInterface {
         super();
     }
 
-    public ServerConnect(Integer port) {
-        this.port = port;
-        this.address = new InetSocketAddress(host, port);
-        makeServer();
-    }
-
     public ServerConnect(String host, Integer port) {
-        this.host = host;
-        this.port = port;
-        this.address = new InetSocketAddress(host, port);
-        makeServer();
+        try {
+            this.host = host.equals("localhost") || host.equals("127.0.0.1")
+                    ? InetAddress.getLocalHost().getHostAddress()
+                    : host;
+            this.port = port;
+            this.address = new InetSocketAddress(host, port);
+            makeServer();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void makeServer() {

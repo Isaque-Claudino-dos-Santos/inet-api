@@ -8,10 +8,12 @@ import com.inet.settings.Env;
 import com.sun.net.httpserver.HttpServer;
 
 public class Server implements ServerInterface {
-    private final ServerConnect connect = new ServerConnect(Env.API_HOST, Env.API_PORT);
     private final ServerRoutes routes = new ServerRoutes();
+    private final ServerConnect connect;
 
-    public Server() {
+    public Server(String host, Integer port) {
+        connect = new ServerConnect(Env.API_HOST, Env.API_PORT);
+
         HttpServer server = connect.getServer();
 
         server.createContext("/", routes);
@@ -24,10 +26,10 @@ public class Server implements ServerInterface {
     public void start() {
         connect.start();
 
-        if (Env.JAVA_ENV.equals("enviroment")) {
+        if (Env.JAVA_ENV.equals("development")) {
             System.out.println("\nServer started");
             System.out
-                    .println(ConsoleColors.GREEN + "http://" + Env.API_HOST + ":" + Env.API_PORT + ConsoleColors.RESET);
+                    .println(ConsoleColors.GREEN + "http://" + connect.getHost() + ":" + Env.API_PORT + ConsoleColors.RESET);
         }
     }
 

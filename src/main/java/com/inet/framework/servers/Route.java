@@ -74,10 +74,6 @@ public class Route implements RouteInterface {
         return endPoint;
     }
 
-    public Consumer<ServerRequest> exec(Consumer<ServerRequest> action) {
-        return action;
-    }
-
     public Route setResponseAction(ResponseActionLambda action) {
         this.action = action;
         return this;
