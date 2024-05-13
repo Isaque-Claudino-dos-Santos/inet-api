@@ -58,19 +58,23 @@ public class ServerRoutes extends HashMap<String, Route> implements ServerRoutes
             middleware.handle(request, response);
 
             if (response.getWasAnswered()) {
+                middlewares.reset();
                 return;
             }
 
             if (middleware.notShouldGoNext()) {
+                middlewares.reset();
                 break;
             }
         }
 
         route.getResponseAction().execute(request, response);
+        middlewares.reset();
 
         if (!response.getWasAnswered()) {
             response.noContent();
         }
+
     }
 
 }
