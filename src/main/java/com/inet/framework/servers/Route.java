@@ -1,9 +1,7 @@
 package com.inet.framework.servers;
 
-import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import com.inet.framework.servers.enums.MethodEnum;
 import com.inet.settings.Env;
 import com.inet.framework.servers.contracts.RouteInterface;
