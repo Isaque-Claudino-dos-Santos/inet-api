@@ -12,6 +12,11 @@ public class MyController {
 
     public static Boolean index(ServerRequest request, ServerResponse response) {
         var body = request.jsonBody(IndexMyDto.class);
+        var id = request.getParams().getInt("id");
+        var test_id = request.getParams().getInt("test_id");
+
+        System.out.println("id: " + id);
+        System.out.println("test_id: " + test_id);
 
         return response.json(body);
     }

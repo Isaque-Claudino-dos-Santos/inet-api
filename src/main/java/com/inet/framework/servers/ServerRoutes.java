@@ -2,47 +2,56 @@ package com.inet.framework.servers;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
+
 import com.inet.framework.servers.contracts.ServerRoutesInterface;
+import com.inet.settings.Env;
 import com.sun.net.httpserver.HttpExchange;
 
-public class ServerRoutes implements ServerRoutesInterface {
-    private final HashMap<String, Route> routes = new HashMap<>();
-
-    public Map<String, Route> getRoutes() {
-        return routes;
-    }
-
-    @Override
+public class ServerRoutes extends HashMap<String, Route> implements ServerRoutesInterface {
     public void add(Route route) {
-        routes.put(route.getRouteKey(), route);
+        put(route.getId(), route);
     }
 
     public Boolean hasRoute(String key) {
-        return routes.size() > 0 && routes.containsKey(key);
+        return size() > 0 && containsKey(key);
     }
 
-    public Boolean NotHasRoute(String key) {
+    public Boolean notHasRoute(String key) {
         return !hasRoute(key);
+    }
+
+    public Boolean notIsParam(String path) {
+        return Env.PATTERN_ROUTE_PARAM.matcher(path).find();
+    }
+
+    private Route findRoute(String id) {
+        for (Route route : values()) {
+            if (route.idMatchWith(id)) {
+                return route;
+            }
+        }
+        return null;
     }
 
     public void handle(HttpExchange httpExchange) throws IOException {
         ServerRequest request = new ServerRequest(httpExchange);
         ServerResponse response = new ServerResponse(httpExchange);
 
-        String routeKey = Route.makeRouteKey(request.getUri(), request.getMethod());
+        if (response.getWasAnswered()) {
+            return;
+        }
 
-        if (NotHasRoute(routeKey)) {
+        String routeRequestId = Route.makeRouteId(request.getUri(), request.getMethod());
+        Route route = findRoute(routeRequestId);
+
+        if (route == null) {
             response.setStatus(404).json("Not found 404");
             return;
         }
 
-        Route route = routes.get(routeKey);
-        RouteMiddlewares middlewares = route.getMiddlewares();
+        request.makeParams(route.getUri());
 
-        if (response.getWasAnswered()) {
-            return;
-        }
+        RouteMiddlewares middlewares = route.getMiddlewares();
 
         while (middlewares.hasNext()) {
             Middleware middleware = middlewares.next();

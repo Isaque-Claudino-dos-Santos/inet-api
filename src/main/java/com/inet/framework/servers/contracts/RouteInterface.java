@@ -16,14 +16,7 @@ public interface RouteInterface {
      * 
      * @return
      */
-    public String getEndPoint();
-
-    /**
-     * Get route key indentify
-     * 
-     * @return
-     */
-    public String getRouteKey();
+    public String getUri();
 
     /**
      * Set action on request
@@ -57,4 +50,25 @@ public interface RouteInterface {
      * @return
      */
     public RouteMiddlewaresInterface getMiddlewares();
+
+    /**
+     * Check if route uri has param
+     * 
+     * @return
+     */
+    public Boolean hasParam();
+
+    /**
+     * Get route id
+     * 
+     * @return
+     */
+    public String getId();
+
+    /**
+     * Check if route id match with value
+     * @param value
+     * @return
+     */
+    public Boolean idMatchWith(String value);
 }

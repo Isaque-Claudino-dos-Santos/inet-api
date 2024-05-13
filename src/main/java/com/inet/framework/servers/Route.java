@@ -1,7 +1,11 @@
 package com.inet.framework.servers;
 
 import java.util.function.Consumer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.inet.framework.servers.enums.MethodEnum;
+import com.inet.settings.Env;
 import com.inet.framework.servers.contracts.RouteInterface;
 import com.inet.framework.servers.contracts.lambdas.ResponseActionLambda;
 
@@ -37,8 +41,19 @@ public class Route implements RouteInterface {
         this.endPoint = endPoint;
     }
 
-    public static String makeRouteKey(String arg0, String arg1) {
-        return arg0.toLowerCase().trim() + "-" + arg1.toLowerCase().trim();
+    public Boolean idMatchWith(String value) {
+        String regex = Env.PATTERN_ROUTE_PARAM.matcher(getId()).replaceAll("(\\\\w*)");
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(value);
+        return matcher.matches();
+    }
+
+    public String getId() {
+        return makeRouteId(endPoint, method);
+    }
+
+    public Boolean hasParam() {
+        return Env.PATTERN_ROUTE_PARAM.matcher(endPoint).find();
     }
 
     public String getMethod() {
@@ -55,16 +70,12 @@ public class Route implements RouteInterface {
         return this;
     }
 
-    public String getEndPoint() {
+    public String getUri() {
         return endPoint;
     }
 
     public Consumer<ServerRequest> exec(Consumer<ServerRequest> action) {
         return action;
-    }
-
-    public String getRouteKey() {
-        return makeRouteKey(endPoint, method);
     }
 
     public Route setResponseAction(ResponseActionLambda action) {
@@ -78,5 +89,9 @@ public class Route implements RouteInterface {
 
     public RouteMiddlewares getMiddlewares() {
         return middlewares;
+    }
+
+    public static String makeRouteId(String arg0, String arg1) {
+        return arg0.toLowerCase().trim() + "-" + arg1.toLowerCase().trim();
     }
 }

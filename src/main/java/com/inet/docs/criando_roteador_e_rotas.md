@@ -12,6 +12,7 @@
     - [Criar Estrutora Base do Roteador](#criar-estrutora-base-do-roteador)
     - [Criar uma Novas Rotas](#criar-uma-novas-rotas)
     - [Registrar Middleware](#registrar-middleware)
+    - [Usando Parametros](#usando-parametros)
     - [Veja Também](#veja-também)
 
 ### Infos
@@ -113,6 +114,26 @@ public class PublicRouter extends Router {
 | ⚠ Obrigatoriamente deve ser adicionado novas middlewares dentro do método `middlewares_registers`.
 
 Para adiciona uma nova middleware é usado o metodo `middleware` passando a middleware não instanciada.
+
+### Usando Parametros
+
+```java
+package com.inet.routes;
+
+import com.inet.framework.servers.Router;
+
+public class PublicRouter extends Router {
+
+    public void registers() {
+        route("GET", "/users/{id}", (request, response) -> {
+            Integer id = request.getParams().getInt('id');
+            response.json(id);
+        });
+    }
+}
+```
+
+Perceba que adicionamos na uri da rota {id} que indica quando for feito um requisição para /users/1, vai ser adicionado um paramentro com a chave id e valor 1.
 
 ### Veja Também
 
