@@ -12,7 +12,7 @@ public class Server implements ServerInterface {
     private final ServerConnect connect;
 
     public Server(String host, Integer port) {
-        connect = new ServerConnect(Env.API_HOST, Env.API_PORT);
+        connect = new ServerConnect(host, port);
 
         HttpServer server = connect.getServer();
 
@@ -29,7 +29,8 @@ public class Server implements ServerInterface {
         if (Env.JAVA_ENV.equals("development")) {
             System.out.println("\nServer started");
             System.out
-                    .println(ConsoleColors.GREEN + "http://" + connect.getHost() + ":" + Env.API_PORT + ConsoleColors.RESET);
+                    .println(ConsoleColors.GREEN + "http://" + connect.getHost() + ":" + Env.API_PORT
+                            + ConsoleColors.RESET);
         }
     }
 
