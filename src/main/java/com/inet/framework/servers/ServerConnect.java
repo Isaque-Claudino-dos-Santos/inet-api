@@ -20,9 +20,7 @@ public class ServerConnect implements ServerConnectInterface {
 
     public ServerConnect(String host, Integer port) {
         try {
-            this.host = host.equals("localhost") || host.equals("127.0.0.1")
-                    ? InetAddress.getLocalHost().getHostAddress()
-                    : host;
+            this.host = InetAddress.getByName(host).getHostAddress();
             this.port = port;
             this.address = new InetSocketAddress(host, port);
             makeServer();

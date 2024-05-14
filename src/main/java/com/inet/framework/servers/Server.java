@@ -1,6 +1,5 @@
 package com.inet.framework.servers;
 
-import com.inet.framework.servers.contracts.ServerConnectInterface;
 import com.inet.framework.servers.contracts.ServerInterface;
 import com.inet.framework.servers.contracts.ServerRoutesInterface;
 import com.inet.framework.utils.ConsoleColors;
@@ -19,7 +18,7 @@ public class Server implements ServerInterface {
         server.createContext("/", routes);
     }
 
-    public ServerConnectInterface getConnect() {
+    public ServerConnect getConnect() {
         return connect;
     }
 
