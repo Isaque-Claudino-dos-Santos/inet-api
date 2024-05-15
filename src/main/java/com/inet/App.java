@@ -1,25 +1,15 @@
 package com.inet;
 
-import com.inet.servers.AppServerSocket;
-import com.inet.views.Scenes;
+import com.inet.framework.servers.Server;
+import com.inet.settings.Env;
+import com.inet.settings.Kernel;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
-
-public class App extends Application {
-    static final AppServerSocket appServerSocket = new AppServerSocket();
-
+public class App {
     public static void main(String[] args) {
-        AppConfig.mysql.runAllMigrations(AppConfig.migrations);
-        
-        launch();
+        Server server = new Server(Env.API_HOST, Env.API_PORT);
+
+        Kernel kernel = new Kernel(server);
+
+        kernel.__boot__();
     }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-
-        stage.setScene(Scenes.userRegisterScene);
-        stage.show();
-    }
-
 }
