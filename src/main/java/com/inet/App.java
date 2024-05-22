@@ -1,10 +1,13 @@
 package com.inet;
 
+import com.inet.databases.Mysql;
 import com.inet.framework.servers.Server;
 import com.inet.settings.Env;
 import com.inet.settings.Kernel;
 
 public class App {
+    public static final Mysql mysql = new Mysql();
+
     public static void main(String[] args) {
         Server server = new Server(Env.API_HOST, Env.API_PORT);
 

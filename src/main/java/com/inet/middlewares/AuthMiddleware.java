@@ -7,8 +7,7 @@ import com.inet.framework.servers.ServerResponse;
 public class AuthMiddleware extends Middleware {
 
     public Boolean handle(ServerRequest request, ServerResponse response) {
-        System.out.println("AuthMiddleware");
-       return next();
+        return next();
     }
 
 }
