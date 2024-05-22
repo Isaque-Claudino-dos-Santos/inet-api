@@ -1,6 +1,6 @@
-package com.inet;
+package com.inet.app;
 
-import com.inet.databases.Mysql;
+import com.inet.app.databases.Mysql;
 import com.inet.framework.servers.Server;
 import com.inet.settings.Env;
 import com.inet.settings.Kernel;

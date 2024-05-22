@@ -1,4 +1,4 @@
-package com.inet.models.data;
+package  com.inet.app.models.data;
 
 public class UserData {
     public Integer id;

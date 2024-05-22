@@ -1,6 +1,6 @@
-package com.inet.resources.user;
+package  com.inet.app.resources.user;
 
-import com.inet.models.data.UserData;
+import  com.inet.app.models.data.UserData;
 
 public class ShowUserResource {
     class Data {

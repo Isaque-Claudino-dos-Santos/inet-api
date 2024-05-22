@@ -1,4 +1,4 @@
-package com.inet.databases;
+package com.inet.app.databases;
 
 import com.inet.framework.databases.Persist.Persist;
 import com.inet.settings.Env;

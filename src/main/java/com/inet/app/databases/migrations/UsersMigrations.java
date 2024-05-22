@@ -1,4 +1,4 @@
-package com.inet.databases.migrations;
+package com.inet.app.databases.migrations;
 
 import com.inet.framework.databases.Persist.table.Migration;
 

@@ -1,11 +1,11 @@
 package com.inet.settings;
 
-
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
-import com.inet.App;
-import com.inet.databases.migrations.UsersMigrations;
+
+import com.inet.app.App;
+import com.inet.app.databases.migrations.UsersMigrations;
 import com.inet.framework.contracts.KernelInterface;
 import com.inet.framework.databases.Persist.PersistConnection;
 import com.inet.framework.databases.Persist.table.Migration;
@@ -13,7 +13,7 @@ import com.inet.framework.databases.contracts.table.scheme.TableSchemeInterface;
 import com.inet.framework.servers.Router;
 import com.inet.framework.servers.Server;
 import com.inet.framework.utils.Reflect;
-import com.inet.routes.PublicRouter;
+import com.inet.app.routes.PublicRouter;
 
 public class Kernel implements KernelInterface {
 

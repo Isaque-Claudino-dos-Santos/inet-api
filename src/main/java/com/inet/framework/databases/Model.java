@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.inet.App;
+import com.inet.app.App;
 import com.inet.framework.databases.Persist.Persist;
 import com.inet.framework.databases.Persist.PersistConnection;
 import com.inet.framework.databases.contracts.ModelInterface;
@@ -175,7 +175,7 @@ public abstract class Model<T> implements ModelInterface<T> {
         }
 
         connection.close();
-        
+
         return data;
     }
 

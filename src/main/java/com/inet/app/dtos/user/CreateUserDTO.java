@@ -1,4 +1,4 @@
-package com.inet.dtos.user;
+package  com.inet.app.dtos.user;
 
 public class CreateUserDTO {
     public String name;

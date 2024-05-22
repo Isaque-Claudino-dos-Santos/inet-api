@@ -1,8 +1,8 @@
-package com.inet.routes;
+package com.inet.app.routes;
 
-import com.inet.controllers.UserController;
+import com.inet.app.controllers.UserController;
 import com.inet.framework.servers.Router;
-import com.inet.middlewares.AuthMiddleware;
+import com.inet.app.middlewares.AuthMiddleware;
 
 public class PublicRouter extends Router {
 

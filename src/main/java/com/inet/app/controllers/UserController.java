@@ -1,15 +1,15 @@
-package com.inet.controllers;
+package com.inet.app.controllers;
 
-import com.inet.dtos.user.CreateUserDTO;
-import com.inet.dtos.user.UpdateUserDTO;
+import com.inet.app.dtos.user.CreateUserDTO;
+import com.inet.app.dtos.user.UpdateUserDTO;
 import com.inet.framework.servers.ServerRequest;
 import com.inet.framework.servers.ServerResponse;
-import com.inet.models.User;
-import com.inet.models.data.UserData;
-import com.inet.resources.error.NotFoundResource;
-import com.inet.resources.user.CreateUserResource;
-import com.inet.resources.user.ShowUserResource;
-import com.inet.resources.user.UpdateUserResource;
+import com.inet.app.models.User;
+import com.inet.app.models.data.UserData;
+import com.inet.app.resources.error.NotFoundResource;
+import com.inet.app.resources.user.CreateUserResource;
+import com.inet.app.resources.user.ShowUserResource;
+import com.inet.app.resources.user.UpdateUserResource;
 
 public class UserController {
     private static Boolean responseUserNotFound(ServerResponse response, Integer id) {

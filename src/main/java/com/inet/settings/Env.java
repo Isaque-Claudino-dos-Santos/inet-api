@@ -1,4 +1,4 @@
-package com.inet.settings;
+package  com.inet.settings;
 
 import java.util.regex.Pattern;
 

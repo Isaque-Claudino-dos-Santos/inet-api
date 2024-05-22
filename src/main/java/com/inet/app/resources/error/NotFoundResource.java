@@ -1,4 +1,4 @@
-package com.inet.resources.error;
+package  com.inet.app.resources.error;
 
 public class NotFoundResource {
     class Error {
