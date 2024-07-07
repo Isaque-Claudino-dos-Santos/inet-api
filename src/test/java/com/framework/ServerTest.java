@@ -1,4 +1,4 @@
-package java.com.framework;
+package com.framework;
 
 import com.framework.facades.Request;
 import com.framework.servers.ClientRequest;
