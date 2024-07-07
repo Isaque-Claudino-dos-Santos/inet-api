@@ -29,8 +29,8 @@ As controller é utilizada nas rotas, controller pode ter varios métodos para a
 ```java
 package com.inet.controllers;
 
-import com.inet.framework.servers.ServerRequest;
-import com.inet.framework.servers.ServerResponse;
+import com.framework.servers.ServerRequest;
+import com.framework.servers.ServerResponse;
 
 public class MyController {
     public static Boolean index(ServerRequest request, ServerResponse response) {
@@ -59,7 +59,7 @@ public class MyController {
 package com.inet.routes;
 
 import com.inet.controllers.MyController;
-import com.inet.framework.servers.Router;
+import com.framework.servers.Router;
 
 public class PublicRouter extends Router {
 

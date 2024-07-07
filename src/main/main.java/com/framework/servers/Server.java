@@ -1,0 +1,39 @@
+package com.framework.servers;
+
+import com.framework.servers.contracts.ServerInterface;
+import com.framework.servers.contracts.ServerRoutesInterface;
+import com.framework.utils.ConsoleColors;
+import com.inet.settings.Env;
+import com.sun.net.httpserver.HttpServer;
+
+public class Server implements ServerInterface {
+    private final ServerRoutes routes = new ServerRoutes();
+    private final ServerConnect connect;
+
+    public Server(String host, Integer port) {
+        connect = new ServerConnect(host, port);
+
+        HttpServer server = connect.getServer();
+
+        server.createContext("/", routes);
+    }
+
+    public ServerConnect getConnect() {
+        return connect;
+    }
+
+    public void start() {
+        connect.start();
+
+        if (Env.JAVA_ENV.equals("development")) {
+            System.out.println("\nServer started");
+            System.out
+                    .println(ConsoleColors.GREEN + "http://" + connect.getHost() + ":" + Env.API_PORT
+                            + ConsoleColors.RESET);
+        }
+    }
+
+    public ServerRoutesInterface getServerRoutes() {
+        return routes;
+    }
+}
