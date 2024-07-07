@@ -6,34 +6,51 @@ import com.framework.utils.ConsoleColors;
 import com.inet.settings.Env;
 import com.sun.net.httpserver.HttpServer;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
+
 public class Server implements ServerInterface {
     private final ServerRoutes routes = new ServerRoutes();
-    private final ServerConnect connect;
+    private String host = "localhost";
+    private Integer port = 3000;
+    private InetSocketAddress address;
+    private HttpServer server = null;
 
     public Server(String host, Integer port) {
-        connect = new ServerConnect(host, port);
-
-        HttpServer server = connect.getServer();
-
-        server.createContext("/", routes);
+        try {
+            this.host = InetAddress.getByName(host).getHostAddress();
+            this.port = port;
+            this.address = new InetSocketAddress(host, port);
+            server = HttpServer.create(address, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public ServerConnect getConnect() {
-        return connect;
-    }
 
     public void start() {
-        connect.start();
-
-        if (Env.JAVA_ENV.equals("development")) {
-            System.out.println("\nServer started");
-            System.out
-                    .println(ConsoleColors.GREEN + "http://" + connect.getHost() + ":" + Env.API_PORT
-                            + ConsoleColors.RESET);
-        }
+        server.start();
     }
 
     public ServerRoutesInterface getServerRoutes() {
         return routes;
+    }
+
+    public Integer getPort() {
+        return port;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public InetSocketAddress getAddress() {
+        return address;
+    }
+
+    public HttpServer getServer() {
+        return server;
     }
 }

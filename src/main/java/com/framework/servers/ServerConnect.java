@@ -5,10 +5,9 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 
-import com.framework.servers.contracts.ServerConnectInterface;
 import com.sun.net.httpserver.*;
 
-public class ServerConnect implements ServerConnectInterface {
+public class ServerConnect {
     private String host = "localhost";
     private Integer port = 3000;
     private InetSocketAddress address;

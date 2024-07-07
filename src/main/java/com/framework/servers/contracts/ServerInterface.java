@@ -1,12 +1,25 @@
 package com.framework.servers.contracts;
 
+import com.sun.net.httpserver.HttpServer;
+
+import java.net.InetSocketAddress;
+
 public interface ServerInterface {
+
     /**
-     * Get http connect
-     * 
-     * @return
+     * Get server port
      */
-    public ServerConnectInterface getConnect();
+    public Integer getPort();
+
+    /**
+     * Get server host
+     */
+    public String getHost();
+
+    /**
+     * Get server address
+     */
+    public InetSocketAddress getAddress();
 
     /**
      * Start http server
@@ -14,9 +27,12 @@ public interface ServerInterface {
     public void start();
 
     /**
+     * Get http server
+     */
+    public HttpServer getServer();
+
+    /**
      * Return server routes
-     * 
-     * @return
      */
     public ServerRoutesInterface getServerRoutes();
 }
