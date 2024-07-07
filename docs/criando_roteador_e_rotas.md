@@ -42,7 +42,7 @@ O roteador e as rotas são usada para manipulção de requisições *HTTP*, gere
 ```java
 package com.inet.routes;
 
-import com.framework.servers.Router;
+import servers.framework.src.main.java.com.Router;
 
 public class PublicRouter extends Router {
 
@@ -57,7 +57,7 @@ public class PublicRouter extends Router {
 ```java
 package com.inet.routes;
 
-import com.framework.servers.Router;
+import servers.framework.src.main.java.com.Router;
 
 public class PublicRouter extends Router {
 
@@ -90,7 +90,7 @@ Mas caso não sejá feito nenhuma responsta é feito automaticamente uma respont
 ```java
 package com.inet.routes;
 
-import com.framework.servers.Router;
+import servers.framework.src.main.java.com.Router;
 import com.inet.middlewares.AuthMiddleware;
 
 public class PublicRouter extends Router {
@@ -120,7 +120,7 @@ Para adiciona uma nova middleware é usado o metodo `middleware` passando a midd
 ```java
 package com.inet.routes;
 
-import com.framework.servers.Router;
+import servers.framework.src.main.java.com.Router;
 
 public class PublicRouter extends Router {
 
