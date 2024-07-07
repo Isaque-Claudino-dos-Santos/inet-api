@@ -8,8 +8,9 @@ import com.inet.settings.Env;
 import com.sun.net.httpserver.HttpExchange;
 
 public class ServerRoutes extends HashMap<String, Route> implements ServerRoutesInterface {
-    public void add(Route route) {
+    public ServerRoutes add(Route route) {
         put(route.getId(), route);
+        return this;
     }
 
     public Boolean hasRoute(String key) {
