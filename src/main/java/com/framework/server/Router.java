@@ -8,7 +8,7 @@ import com.framework.server.contracts.ServerInterface;
 import com.framework.server.contracts.lambdas.ResponseActionLambda;
 import com.framework.utils.Reflect;
 
-public class Router implements RouterInterface {
+public abstract class Router implements RouterInterface {
     private ServerInterface server = null;
     private final List<Middleware> middlewares = new ArrayList<>();
 
