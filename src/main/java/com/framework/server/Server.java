@@ -1,15 +1,12 @@
-package com.framework.servers;
+package com.framework.server;
 
-import com.framework.servers.contracts.ServerInterface;
-import com.framework.servers.contracts.ServerRoutesInterface;
-import com.framework.utils.ConsoleColors;
-import com.inet.settings.Env;
+import com.framework.server.contracts.ServerInterface;
+import com.framework.server.contracts.ServerRoutesInterface;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.net.UnknownHostException;
 
 public class Server implements ServerInterface {
     private final ServerRoutes routes = new ServerRoutes();

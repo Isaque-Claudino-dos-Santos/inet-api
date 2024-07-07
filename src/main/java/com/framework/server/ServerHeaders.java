@@ -1,6 +1,6 @@
-package com.framework.servers;
+package com.framework.server;
 
-import com.framework.servers.contracts.ServerHeadersInterface;
+import com.framework.server.contracts.ServerHeadersInterface;
 import com.sun.net.httpserver.Headers;
 
 public class ServerHeaders implements ServerHeadersInterface {

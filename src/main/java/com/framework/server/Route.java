@@ -1,11 +1,11 @@
-package com.framework.servers;
+package com.framework.server;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.framework.servers.contracts.RouteInterface;
-import com.framework.servers.contracts.lambdas.ResponseActionLambda;
-import com.framework.servers.enums.MethodEnum;
+import com.framework.server.contracts.RouteInterface;
+import com.framework.server.contracts.lambdas.ResponseActionLambda;
+import com.framework.server.enums.MethodEnum;
 import com.inet.settings.Env;
 
 public class Route implements RouteInterface {

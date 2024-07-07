@@ -1,9 +1,9 @@
 package com.framework;
 
 import com.framework.facades.Request;
-import com.framework.servers.Http;
-import com.framework.servers.Route;
-import com.framework.servers.Server;
+import com.framework.server.Http;
+import com.framework.server.Route;
+import com.framework.server.Server;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

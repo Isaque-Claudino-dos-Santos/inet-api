@@ -1,6 +1,6 @@
 package com.framework.facades;
 
-import com.framework.servers.Http;
+import com.framework.server.Http;
 
 public class Request {
     public static Http get(String url) {

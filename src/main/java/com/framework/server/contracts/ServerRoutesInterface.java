@@ -1,7 +1,7 @@
-package com.framework.servers.contracts;
+package com.framework.server.contracts;
 
 import java.util.Map;
-import com.framework.servers.Route;
+import com.framework.server.Route;
 import com.sun.net.httpserver.HttpHandler;
 
 public interface ServerRoutesInterface extends HttpHandler, Map<String, Route> {

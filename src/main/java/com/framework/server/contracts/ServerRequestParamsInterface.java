@@ -1,4 +1,4 @@
-package com.framework.servers.contracts;
+package com.framework.server.contracts;
 
 import java.util.Map;
 

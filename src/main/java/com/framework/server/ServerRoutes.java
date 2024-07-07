@@ -1,9 +1,9 @@
-package com.framework.servers;
+package com.framework.server;
 
 import java.io.IOException;
 import java.util.HashMap;
 
-import com.framework.servers.contracts.ServerRoutesInterface;
+import com.framework.server.contracts.ServerRoutesInterface;
 import com.inet.settings.Env;
 import com.sun.net.httpserver.HttpExchange;
 

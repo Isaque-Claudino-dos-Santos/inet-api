@@ -1,8 +1,8 @@
-package com.framework.servers.contracts;
+package com.framework.server.contracts;
 
 import java.util.Map;
 
-import com.framework.servers.ServerRequestParams;
+import com.framework.server.ServerRequestParams;
 
 public interface ServerRequestInterface {
     public String getUri();

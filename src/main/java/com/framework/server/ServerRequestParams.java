@@ -1,8 +1,8 @@
-package com.framework.servers;
+package com.framework.server;
 
 import java.util.HashMap;
 
-import com.framework.servers.contracts.ServerRequestParamsInterface;
+import com.framework.server.contracts.ServerRequestParamsInterface;
 
 public class ServerRequestParams extends HashMap<String, Object> implements ServerRequestParamsInterface {
     public Integer getInt(String key) {

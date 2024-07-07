@@ -1,8 +1,8 @@
-package com.framework.servers;
+package com.framework.server;
 
 import java.util.ArrayList;
 
-import com.framework.servers.contracts.RouteMiddlewaresInterface;
+import com.framework.server.contracts.RouteMiddlewaresInterface;
 
 public class RouteMiddlewares extends ArrayList<Middleware> implements RouteMiddlewaresInterface {
     private Integer index = -1;

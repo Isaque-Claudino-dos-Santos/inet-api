@@ -1,11 +1,11 @@
-package com.framework.servers;
+package com.framework.server;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.framework.servers.contracts.RouterInterface;
-import com.framework.servers.contracts.ServerInterface;
-import com.framework.servers.contracts.lambdas.ResponseActionLambda;
+import com.framework.server.contracts.RouterInterface;
+import com.framework.server.contracts.ServerInterface;
+import com.framework.server.contracts.lambdas.ResponseActionLambda;
 import com.framework.utils.Reflect;
 
 public class Router implements RouterInterface {

@@ -1,4 +1,4 @@
-package com.framework.servers;
+package com.framework.server;
 
 import com.google.gson.Gson;
 

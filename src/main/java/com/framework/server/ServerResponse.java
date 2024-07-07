@@ -1,11 +1,11 @@
-package com.framework.servers;
+package com.framework.server;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
-import com.framework.servers.contracts.ServerResponseInterface;
+import com.framework.server.contracts.ServerResponseInterface;
 import com.google.gson.Gson;
-import com.framework.servers.enums.StatusEnum;
+import com.framework.server.enums.StatusEnum;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 

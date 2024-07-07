@@ -1,4 +1,4 @@
-package com.framework.servers.enums;
+package com.framework.server.enums;
 
 public enum MethodEnum {
     GET("GET"),

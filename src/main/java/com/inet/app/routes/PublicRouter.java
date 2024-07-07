@@ -1,7 +1,7 @@
 package com.inet.app.routes;
 
 import com.inet.app.controllers.UserController;
-import com.framework.servers.Router;
+import com.framework.server.Router;
 import com.inet.app.middlewares.AuthMiddleware;
 
 public class PublicRouter extends Router {

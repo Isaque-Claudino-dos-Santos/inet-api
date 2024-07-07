@@ -1,12 +1,12 @@
-package com.framework.servers;
+package com.framework.server;
 
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import com.framework.servers.contracts.ServerHeadersInterface;
-import com.framework.servers.contracts.ServerRequestInterface;
+import com.framework.server.contracts.ServerHeadersInterface;
+import com.framework.server.contracts.ServerRequestInterface;
 import com.google.gson.Gson;
 import com.inet.settings.Env;
 import com.sun.net.httpserver.HttpExchange;

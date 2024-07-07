@@ -1,6 +1,6 @@
-package com.framework.servers;
+package com.framework.server;
 
-import com.framework.servers.contracts.MiddlewareInterface;
+import com.framework.server.contracts.MiddlewareInterface;
 
 public abstract class Middleware implements MiddlewareInterface {
     private boolean goNext = false;

@@ -1,4 +1,4 @@
-package com.framework.servers.contracts;
+package com.framework.server.contracts;
 
 import com.sun.net.httpserver.Headers;
 

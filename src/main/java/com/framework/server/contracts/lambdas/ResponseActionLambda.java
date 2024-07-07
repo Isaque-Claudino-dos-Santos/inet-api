@@ -1,7 +1,7 @@
-package com.framework.servers.contracts.lambdas;
+package com.framework.server.contracts.lambdas;
 
-import com.framework.servers.ServerRequest;
-import com.framework.servers.ServerResponse;
+import com.framework.server.ServerRequest;
+import com.framework.server.ServerResponse;
 
 public interface ResponseActionLambda {
     /**

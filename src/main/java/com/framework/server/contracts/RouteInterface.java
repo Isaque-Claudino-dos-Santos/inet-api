@@ -1,7 +1,7 @@
-package com.framework.servers.contracts;
+package com.framework.server.contracts;
 
-import com.framework.servers.contracts.lambdas.ResponseActionLambda;
-import com.framework.servers.enums.MethodEnum;
+import com.framework.server.contracts.lambdas.ResponseActionLambda;
+import com.framework.server.enums.MethodEnum;
 
 public interface RouteInterface {
     /**

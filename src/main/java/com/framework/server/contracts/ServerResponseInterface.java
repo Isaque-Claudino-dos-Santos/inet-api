@@ -1,6 +1,6 @@
-package com.framework.servers.contracts;
+package com.framework.server.contracts;
 
-import com.framework.servers.enums.StatusEnum;
+import com.framework.server.enums.StatusEnum;
 
 public interface ServerResponseInterface {
     public <T extends Object> Boolean json(T data);

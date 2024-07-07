@@ -1,6 +1,6 @@
-package com.framework.servers.contracts;
+package com.framework.server.contracts;
 
-import com.framework.servers.Middleware;
+import com.framework.server.Middleware;
 
 public interface RouterInterface {
     /**
