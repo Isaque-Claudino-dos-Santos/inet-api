@@ -1,26 +1,45 @@
 package com.inet.framework;
 
+import com.inet.framework.facades.Request;
+import com.inet.framework.servers.ClientRequest;
+import com.inet.framework.servers.Route;
+import com.inet.framework.servers.Server;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+class ServerTest {
+    static Server server;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+    // TESTS FLOW
 
-@RunWith(FrameworkTestRunner.class)
-public class ServerTest {
+    @BeforeAll
+    public static void before_all_start_server() {
+        server = new Server("localhost", 3001);
+        server.start();
+    }
+
+    @AfterEach
+    public void after_each_clean_routes() {
+        server.getServerRoutes().clear();
+    }
+
+    // TESTS
+
     @Test
-    public void it_should_start_server() throws Exception {
-        assertTrue(true);
+    void must_create_route_successfully() {
+        server.getServerRoutes().add(new Route("GET", "/", (req, res) -> res.setStatus(200).json("Hello World")));
 
-        HttpRequest request = HttpRequest.newBuilder(URI.create("http://localhost:3001")).GET().build();
-        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        ClientRequest request = Request.get("http://localhost:3001" + "/").send();
 
-        assertEquals(response.body(), "Hello World");
+        assertEquals("Hello World", request.body(String.class));
+    }
 
+    @Test
+    void must_return_not_found_on_not_setting_route() {
+        ClientRequest request = Request.get("http://localhost:3001" + "/").send();
+        assertEquals("Not found 404", request.body(String.class));
     }
 }
