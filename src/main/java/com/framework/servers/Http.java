@@ -9,7 +9,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
-public class ClientRequest {
+public class Http {
     private final Gson gson = new Gson();
     protected HttpRequest request = null;
     protected HttpRequest.Builder requestBuilder = null;
@@ -18,7 +18,7 @@ public class ClientRequest {
     protected URI uri = null;
     protected HttpRequest.BodyPublisher data = HttpRequest.BodyPublishers.ofString("");
 
-    public ClientRequest(String method, String url) {
+    public Http(String method, String url) {
         uri = URI.create(url);
         requestBuilder = HttpRequest.newBuilder(uri).method(method, data);
         client = HttpClient.newHttpClient();
@@ -27,7 +27,7 @@ public class ClientRequest {
     /**
      * Add header
      */
-    public ClientRequest header(String key, String value) {
+    public Http header(String key, String value) {
         requestBuilder.header(key, value);
         return this;
     }
@@ -35,7 +35,7 @@ public class ClientRequest {
     /**
      * Set timeout
      */
-    public ClientRequest timeout(Duration duration) {
+    public Http timeout(Duration duration) {
         requestBuilder.timeout(duration);
         return this;
     }
@@ -43,7 +43,7 @@ public class ClientRequest {
     /**
      * Set data to request
      */
-    public <D> ClientRequest data(D content) {
+    public <D> Http data(D content) {
         data = HttpRequest.BodyPublishers.ofString(gson.toJson(content));
         return this;
     }
@@ -51,7 +51,7 @@ public class ClientRequest {
     /**
      * Send request
      */
-    public ClientRequest send() {
+    public Http send() {
         try {
             request = requestBuilder.build();
             response = client.send(request, HttpResponse.BodyHandlers.ofString());

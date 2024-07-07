@@ -24,6 +24,7 @@ public class Server implements ServerInterface {
             this.port = port;
             this.address = new InetSocketAddress(host, port);
             server = HttpServer.create(address, 1);
+            server.createContext("/", routes);
         } catch (IOException e) {
             e.printStackTrace();
         }
