@@ -1,9 +1,6 @@
-package com.framework;
+package com.framework.server;
 
 import com.framework.facades.Request;
-import com.framework.server.Http;
-import com.framework.server.Route;
-import com.framework.server.Server;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -42,4 +39,10 @@ class ServerTest {
         Http request = Request.get("http://localhost:3001" + "/").send();
         assertEquals("Not found 404", request.body(String.class));
     }
+
+    @Test
+    void it_should_create_route() {
+
+    }
+
 }
