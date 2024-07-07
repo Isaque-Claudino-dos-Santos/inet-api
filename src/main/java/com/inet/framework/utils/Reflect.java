@@ -1,6 +1,8 @@
 package com.inet.framework.utils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,7 +39,9 @@ public class Reflect {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
-    };
+    }
+
+    ;
 
     public static List<Field> getFields(Object obj) {
 
@@ -48,7 +52,9 @@ public class Reflect {
         }
 
         return null;
-    };
+    }
+
+    ;
 
     public static Field getField(Object obj, String fieldName) {
         try {
@@ -77,5 +83,13 @@ public class Reflect {
             exception.printStackTrace();
         }
 
+    }
+
+    public static Object invoke(Method method, Object obj, Object... args) {
+        try {
+            return method.invoke(obj, args);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
