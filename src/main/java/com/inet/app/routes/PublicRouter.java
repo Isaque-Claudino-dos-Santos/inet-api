@@ -7,11 +7,11 @@ import com.inet.app.middlewares.AuthMiddleware;
 public class PublicRouter extends Router {
 
     public void registers() {
-        route.get("/users", UserController::index);
-        route.post("/users", UserController::store);
-        route.get("/users/{id}", UserController::show);
-        route.put("/users/{id}", UserController::update);
-        route.delete("/users/{id}", UserController::destroy);
+        get("/users", UserController::index);
+        post("/users", UserController::store);
+        get("/users/{id}", UserController::show);
+        put("/users/{id}", UserController::update);
+        delete("/users/{id}", UserController::destroy);
     }
 
     public void middlewares_registers() {

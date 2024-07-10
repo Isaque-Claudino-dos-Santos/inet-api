@@ -1,6 +1,7 @@
 package com.framework.server.contracts;
 
 import com.framework.server.Middleware;
+import com.framework.server.contracts.lambdas.ResponseActionLambda;
 
 public interface RouterInterface {
     /**
@@ -24,4 +25,14 @@ public interface RouterInterface {
      * Add new middleware in all routes
      */
     public void middleware(Class<? extends Middleware> middleware);
+
+    public void get(String uri, ResponseActionLambda action);
+
+    public void post(String uri, ResponseActionLambda action);
+
+    public void put(String uri, ResponseActionLambda action);
+
+    public void delete(String uri, ResponseActionLambda action);
+
+    public void patch(String uri, ResponseActionLambda action);
 }
