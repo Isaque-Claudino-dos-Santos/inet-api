@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="inet" />
+        <module name="inet-api" />
       </profile>
     </annotationProcessing>
   </component>
