@@ -1,8 +1,8 @@
 package  com.inet.app.middlewares;
 
-import  com.inet.framework.servers.Middleware;
-import  com.inet.framework.servers.ServerRequest;
-import  com.inet.framework.servers.ServerResponse;
+import com.framework.server.Middleware;
+import com.framework.server.ServerRequest;
+import com.framework.server.ServerResponse;
 
 public class AuthMiddleware extends Middleware {
 

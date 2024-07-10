@@ -6,13 +6,13 @@ import java.util.List;
 
 import com.inet.app.App;
 import com.inet.app.databases.migrations.UsersMigrations;
-import com.inet.framework.contracts.KernelInterface;
-import com.inet.framework.databases.Persist.PersistConnection;
-import com.inet.framework.databases.Persist.table.Migration;
-import com.inet.framework.databases.contracts.table.scheme.TableSchemeInterface;
-import com.inet.framework.servers.Router;
-import com.inet.framework.servers.Server;
-import com.inet.framework.utils.Reflect;
+import com.framework.contracts.KernelInterface;
+import com.framework.databases.Persist.PersistConnection;
+import com.framework.databases.Persist.table.Migration;
+import com.framework.databases.contracts.table.scheme.TableSchemeInterface;
+import com.framework.server.Router;
+import com.framework.server.Server;
+import com.framework.utils.Reflect;
 import com.inet.app.routes.PublicRouter;
 
 public class Kernel implements KernelInterface {

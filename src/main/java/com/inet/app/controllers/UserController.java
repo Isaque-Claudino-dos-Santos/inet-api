@@ -2,8 +2,8 @@ package com.inet.app.controllers;
 
 import com.inet.app.dtos.user.CreateUserDTO;
 import com.inet.app.dtos.user.UpdateUserDTO;
-import com.inet.framework.servers.ServerRequest;
-import com.inet.framework.servers.ServerResponse;
+import com.framework.server.ServerRequest;
+import com.framework.server.ServerResponse;
 import com.inet.app.models.User;
 import com.inet.app.models.data.UserData;
 import com.inet.app.resources.error.NotFoundResource;

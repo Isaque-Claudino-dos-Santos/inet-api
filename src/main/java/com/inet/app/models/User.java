@@ -1,6 +1,6 @@
 package com.inet.app.models;
 
-import com.inet.framework.databases.Model;
+import com.framework.databases.Model;
 import com.inet.app.models.data.UserData;
 
 public class User extends Model<UserData> {

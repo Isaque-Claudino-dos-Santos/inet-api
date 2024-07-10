@@ -1,6 +1,6 @@
 package com.inet.app.databases;
 
-import com.inet.framework.databases.Persist.Persist;
+import com.framework.databases.Persist.Persist;
 import com.inet.settings.Env;
 
 public class Mysql extends Persist {
