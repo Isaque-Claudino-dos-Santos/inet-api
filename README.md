@@ -1,11 +1,18 @@
 # Inet Java
 
-- [Documentação App/Framework](./src/main/java/com/inet/docs/README.md)
+- [Documentação App/Framework](docs/README.md)
 
 ## Summary
 
 - [Summary](#summary)
-  - [Rodar Testes](#rodar-testes)
+    - [Rodar Testes](#rodar-testes)
+    - [Clonar Projeto](#clonar-projeto)
+
+### Clonar Projeto
+
+```text
+git@github.com:Isaque-Claudino-dos-Santos/inet-api.git
+```
 
 ### Rodar Testes
 

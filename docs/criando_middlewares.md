@@ -31,9 +31,9 @@ Middlewares são utilizadas para manuziar `requests` e `responses` da rota anté
 ```java
 package com.inet.middlewares;
 
-import com.inet.framework.servers.Middleware;
-import com.inet.framework.servers.ServerRequest;
-import com.inet.framework.servers.ServerResponse;
+import servers.framework.src.main.java.com.Middleware;
+import servers.framework.src.main.java.com.ServerRequest;
+import servers.framework.src.main.java.com.ServerResponse;
 
 public class AuthMiddleware extends Middleware {
 
@@ -48,15 +48,15 @@ public class AuthMiddleware extends Middleware {
 ```java
 package com.inet.middlewares;
 
-import com.inet.framework.servers.Middleware;
-import com.inet.framework.servers.ServerRequest;
-import com.inet.framework.servers.ServerResponse;
+import servers.framework.src.main.java.com.Middleware;
+import servers.framework.src.main.java.com.ServerRequest;
+import servers.framework.src.main.java.com.ServerResponse;
 
 public class AuthMiddleware extends Middleware {
 
     public Boolean handle(ServerRequest request, ServerResponse response) {
 
-        if(request.getQuerys().get('code')->equals('123')) {
+        if (request.getQuerys().get('code')->equals('123')){
             return next();
         }
 

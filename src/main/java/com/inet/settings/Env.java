@@ -18,7 +18,7 @@ public class Env {
     public final static String DB_DRIVES = env.get("DB_DRIVES", "jdbc:mysql");
 
     // directory
-    public final static String DIR_BASE = "src/main/java/com/inet";
+    public final static String DIR_BASE = "/com/inet";
 
     // Http API
     public final static Integer API_PORT = Integer.valueOf(env.get("API_PORT", "3000"));

@@ -1,6 +1,6 @@
 package com.inet.app.databases.migrations;
 
-import com.inet.framework.databases.Persist.table.Migration;
+import com.framework.databases.Persist.table.Migration;
 
 public class UsersMigrations extends Migration {
 
