@@ -1,6 +1,9 @@
 package com.framework.server;
 
-import com.framework.facades.Request;
+import com.framework.constants.server.HttpClientRequest;
+import com.framework.constants.server.Server;
+import com.framework.facades.Http;
+import com.framework.constants.server.router.Route;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -27,16 +30,16 @@ class ServerTest {
 
     @Test
     void must_create_route_successfully() {
-        server.getServerRoutes().add(new Route("GET", "/", (req, res) -> res.setStatus(200).json("Hello World")));
+        server.getServerRoutes().add(new Route("GET", "/", (req, res) -> res.json("Hello World", 200)));
 
-        Http request = Request.get("http://localhost:3001" + "/").send();
+        HttpClientRequest request = Http.get("http://localhost:3001" + "/").send();
 
         assertEquals("Hello World", request.body(String.class));
     }
 
     @Test
     void must_return_not_found_on_not_setting_route() {
-        Http request = Request.get("http://localhost:3001" + "/").send();
+        HttpClientRequest request = Http.get("http://localhost:3001" + "/").send();
         assertEquals("Not found 404", request.body(String.class));
     }
 

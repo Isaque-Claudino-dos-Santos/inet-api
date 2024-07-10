@@ -1,7 +1,7 @@
 package com.inet.app;
 
 import com.inet.app.databases.Mysql;
-import com.framework.server.Server;
+import com.framework.constants.server.Server;
 import com.inet.settings.Env;
 import com.inet.settings.Kernel;
 
