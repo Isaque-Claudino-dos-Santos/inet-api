@@ -63,7 +63,6 @@ public class ServerRoutes extends HashMap<String, Route> implements ServerRoutes
                 }
 
                 if (middleware.notShouldGoNext()) {
-                    middlewares.reset();
                     break;
                 }
             }
