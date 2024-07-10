@@ -2,6 +2,7 @@ package com.framework.server.router;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.framework.server.Middleware;
 import com.framework.server.contracts.RouterInterface;
@@ -9,17 +10,27 @@ import com.framework.server.contracts.ServerInterface;
 import com.framework.server.contracts.lambdas.ResponseActionLambda;
 import com.framework.utils.Reflect;
 
-public abstract class Router implements RouterInterface {
-    public ServerInterface server = null;
+public class Router implements RouterInterface {
+    private ServerInterface server = null;
     public final List<Middleware> middlewares = new ArrayList<>();
 
     public void setServer(ServerInterface server) {
         this.server = server;
     }
 
-    public void middleware(Class<? extends Middleware> middleware) {
-        Middleware instance = Reflect.newInstance(middleware, null);
-        middlewares.add(instance);
+    @SafeVarargs
+    public final void middleware(Class<? extends Middleware>... classMiddlewares) {
+        for (Class<? extends Middleware> classMiddleware : classMiddlewares) {
+            Middleware middleware = Reflect.newInstance(classMiddleware, null);
+            middlewares.add(middleware);
+        }
+    }
+
+    public Router group(Consumer<Router> consumer) {
+        Router router = new Router();
+        router.setServer(server);
+        consumer.accept(router);
+        return router;
     }
 
     public void get(String uri, ResponseActionLambda action) {

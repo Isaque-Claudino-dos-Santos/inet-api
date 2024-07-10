@@ -24,7 +24,7 @@ public interface RouterInterface {
     /**
      * Add new middleware in all routes
      */
-    public void middleware(Class<? extends Middleware> middleware);
+    public void middleware(Class<? extends Middleware>... classMiddlewares);
 
     public void get(String uri, ResponseActionLambda action);
 
