@@ -64,10 +64,22 @@ public class HttpClientRequest {
     /**
      * Get body response
      */
-    public <T> T body(Class<T> modelClass) {
+    public <T> Object body(Class<T> modelClass) {
         if (response == null) return null;
 
-        return modelClass.equals(String.class) || modelClass.equals(Integer.class) || modelClass.equals(Boolean.class) ? (T) response.body() : gson.fromJson(response.body(), modelClass);
+        if (modelClass.equals(String.class)) {
+            return String.valueOf(response.body());
+        }
+
+        if (modelClass.equals(Integer.class)) {
+            return Integer.valueOf(response.body());
+        }
+
+        if (modelClass.equals(Boolean.class)) {
+            return Boolean.valueOf(response.body());
+        }
+
+        return gson.fromJson(response.body(), modelClass);
     }
 
     /**
