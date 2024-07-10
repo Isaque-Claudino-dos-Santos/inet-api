@@ -1,10 +1,10 @@
 package com.inet.app.controllers;
 
-import com.framework.constants.server.response.modules.JsonResponse;
+import com.framework.server.response.modules.JsonResponse;
 import com.inet.app.dtos.user.CreateUserDTO;
 import com.inet.app.dtos.user.UpdateUserDTO;
-import com.framework.constants.server.ServerRequest;
-import com.framework.constants.server.response.ServerResponse;
+import com.framework.server.ServerRequest;
+import com.framework.server.response.ServerResponse;
 import com.inet.app.models.User;
 import com.inet.app.models.data.UserData;
 import com.inet.app.resources.error.NotFoundResource;

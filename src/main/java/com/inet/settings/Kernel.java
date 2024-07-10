@@ -10,8 +10,8 @@ import com.framework.contracts.KernelInterface;
 import com.framework.databases.Persist.PersistConnection;
 import com.framework.databases.Persist.table.Migration;
 import com.framework.databases.contracts.table.scheme.TableSchemeInterface;
-import com.framework.constants.server.router.Router;
-import com.framework.constants.server.Server;
+import com.framework.server.router.Router;
+import com.framework.server.Server;
 import com.framework.utils.Reflect;
 import com.inet.app.routes.PublicRouter;
 

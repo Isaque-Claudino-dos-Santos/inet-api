@@ -1,9 +1,7 @@
 package com.framework.server;
 
-import com.framework.constants.server.HttpClientRequest;
-import com.framework.constants.server.Server;
 import com.framework.facades.Http;
-import com.framework.constants.server.router.Route;
+import com.framework.server.router.Route;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

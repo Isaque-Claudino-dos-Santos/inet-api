@@ -1,7 +1,7 @@
 package com.framework.server;
 
-import com.framework.constants.server.response.modules.JsonResponse;
-import com.framework.constants.server.router.Route;
+import com.framework.server.response.modules.JsonResponse;
+import com.framework.server.router.Route;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
