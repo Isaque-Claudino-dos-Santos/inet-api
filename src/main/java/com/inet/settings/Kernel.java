@@ -17,6 +17,13 @@ import com.inet.app.routes.PublicRouter;
 
 public class Kernel implements KernelInterface {
 
+    //
+    //
+    // ###########################
+    // ##   Kernel Definitions  ##
+    // ###########################
+    //
+    //
     private final List<Class<? extends Router>> routersList = List.of(PublicRouter.class);
 
     private final List<Class<? extends Migration>> migrations = List.of(UsersMigrations.class);
