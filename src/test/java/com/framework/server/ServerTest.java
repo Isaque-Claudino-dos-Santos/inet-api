@@ -11,8 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ServerTest {
     static Server server;
 
-    // TESTS FLOW
-
     @BeforeAll
     public static void before_all_start_server() {
         server = new Server("localhost", 3001);
@@ -24,11 +22,10 @@ class ServerTest {
         server.getServerRoutes().clear();
     }
 
-    // TESTS
-
     @Test
     void must_create_route_successfully() {
-        server.getServerRoutes().add(new Route("GET", "/", (req, res) -> res.json("Hello World", 200)));
+        Route route = new Route("GET", "/", (req, res) -> res.json("Hello World", 200));
+        server.getServerRoutes().add(route);
 
         HttpClientRequest request = Http.get("http://localhost:3001" + "/").send();
 
