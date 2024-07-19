@@ -11,13 +11,13 @@ import com.inet.settings.Env;
 
 public class Route implements RouteInterface {
     private String method = null;
-    private String endPoint = null;
+    private String endpoint = null;
     private ResponseActionLambda action = null;
     public final RouteMiddlewares middlewares = new RouteMiddlewares();
 
-    public Route(String method, String endPoint, ResponseActionLambda action) {
+    public Route(String method, String endpoint, ResponseActionLambda action) {
         this.method = method;
-        this.endPoint = endPoint;
+        this.endpoint = endpoint;
         this.action = action;
     }
 
@@ -29,11 +29,11 @@ public class Route implements RouteInterface {
     }
 
     public String getId() {
-        return makeRouteId(endPoint, method);
+        return makeRouteId(endpoint, method);
     }
 
     public Boolean hasParam() {
-        return Env.PATTERN_ROUTE_PARAM.matcher(endPoint).find();
+        return Env.PATTERN_ROUTE_PARAM.matcher(endpoint).find();
     }
 
     public String getMethod() {
@@ -51,7 +51,7 @@ public class Route implements RouteInterface {
     }
 
     public String getUri() {
-        return endPoint;
+        return endpoint;
     }
 
     public Route setResponseAction(ResponseActionLambda action) {
