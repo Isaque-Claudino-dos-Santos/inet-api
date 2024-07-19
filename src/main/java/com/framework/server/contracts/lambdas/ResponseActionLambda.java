@@ -8,5 +8,5 @@ public interface ResponseActionLambda {
     /**
      * Action on request
      */
-    public Response execute(ServerRequest request, ServerResponse response);
+    public Response execute(ServerRequest request, ServerResponse response) throws Exception;
 }
