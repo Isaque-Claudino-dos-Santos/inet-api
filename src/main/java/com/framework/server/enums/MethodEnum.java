@@ -8,7 +8,7 @@ public enum MethodEnum {
     OPTION("OPTION"),
     PATCH("PATCH");
 
-    public String value;
+    public final String value;
 
     MethodEnum(String value) {
         this.value = value;
