@@ -8,7 +8,7 @@ public class ServerRequestParams extends HashMap<String, Object> implements Serv
     public Integer getInt(String key) {
         Object data = get(key);
 
-        if (data == null || !(data instanceof String)) {
+        if (!(data instanceof String)) {
             return null;
         }
 
@@ -22,7 +22,7 @@ public class ServerRequestParams extends HashMap<String, Object> implements Serv
     public String getString(String key) {
         Object data = get(key);
 
-        if (data == null || !(data instanceof String)) {
+        if (!(data instanceof String)) {
             return null;
         }
 

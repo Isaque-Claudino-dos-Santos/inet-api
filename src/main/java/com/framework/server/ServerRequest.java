@@ -5,22 +5,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import com.framework.server.contracts.ServerHeadersInterface;
 import com.framework.server.contracts.ServerRequestInterface;
 import com.google.gson.Gson;
 import com.inet.settings.Env;
+import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 
 public class ServerRequest implements ServerRequestInterface {
     private final HttpExchange httpExchange;
-    private final ServerHeaders headers;
+    private final Headers headers;
     private final URI uri;
     private final ServerRequestParams params = new ServerRequestParams();
 
     public ServerRequest(HttpExchange httpExchange) {
         this.httpExchange = httpExchange;
         uri = httpExchange.getRequestURI();
-        headers = new ServerHeaders(httpExchange.getRequestHeaders());
+        headers = httpExchange.getRequestHeaders();
     }
 
     private Boolean isParam(String part) {
@@ -42,6 +42,10 @@ public class ServerRequest implements ServerRequestInterface {
         }
     }
 
+    public Headers getHeaders() {
+        return headers;
+    }
+
     public ServerRequestParams getParams() {
         return params;
     }
@@ -50,36 +54,32 @@ public class ServerRequest implements ServerRequestInterface {
         return uri.getPath();
     }
 
-    public Map<String, String> getQuerys() {
-        Map<String, String> querys = new HashMap<>();
+    public Map<String, String> getQueries() {
+        Map<String, String> queries = new HashMap<>();
 
         for (String query : uri.getQuery().split("&")) {
             String[] keyAndValue = query.split("=");
-            querys.put(keyAndValue[0], keyAndValue[1]);
+            queries.put(keyAndValue[0], keyAndValue[1]);
         }
 
-        return querys;
-    }
-
-    public ServerHeadersInterface getHeaders() {
-        return headers;
+        return queries;
     }
 
     public String getMethod() {
         return httpExchange.getRequestMethod();
     }
 
-    public <T extends Object> T jsonBody(Class<? extends T> dto) {
+    public <T> T jsonBody(Class<? extends T> dto) {
         Gson gson = new Gson();
-        String body = "";
+        StringBuilder body = new StringBuilder();
         Scanner input = new Scanner(httpExchange.getRequestBody());
 
         while (input.hasNextLine()) {
-            body += input.nextLine();
+            body.append(input.nextLine());
         }
 
         input.close();
 
-        return gson.fromJson(body, dto);
+        return gson.fromJson(body.toString(), dto);
     }
 }

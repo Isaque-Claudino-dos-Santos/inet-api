@@ -1,43 +1,24 @@
-package com.framework.server;
+package com.framework.server.router;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.framework.server.contracts.RouteInterface;
 import com.framework.server.contracts.lambdas.ResponseActionLambda;
+import com.framework.server.RouteMiddlewares;
 import com.framework.server.enums.MethodEnum;
 import com.inet.settings.Env;
 
 public class Route implements RouteInterface {
     private String method = null;
-    private String endPoint = null;
+    private String endpoint = null;
     private ResponseActionLambda action = null;
     public final RouteMiddlewares middlewares = new RouteMiddlewares();
 
-    public Route(String endPoint) {
-        this.endPoint = endPoint;
-    }
-
-    public Route(String method, String endPoint, ResponseActionLambda action) {
+    public Route(String method, String endpoint, ResponseActionLambda action) {
         this.method = method;
-        this.endPoint = endPoint;
+        this.endpoint = endpoint;
         this.action = action;
-    }
-
-    public Route(MethodEnum method, String endPoint, ResponseActionLambda action) {
-        this.method = method.value;
-        this.endPoint = endPoint;
-        this.action = action;
-    }
-
-    public Route(String method, String endPoint) {
-        this.method = method;
-        this.endPoint = endPoint;
-    }
-
-    public Route(MethodEnum method, String endPoint) {
-        this.method = method.value;
-        this.endPoint = endPoint;
     }
 
     public Boolean idMatchWith(String value) {
@@ -48,11 +29,11 @@ public class Route implements RouteInterface {
     }
 
     public String getId() {
-        return makeRouteId(endPoint, method);
+        return makeRouteId(endpoint, method);
     }
 
     public Boolean hasParam() {
-        return Env.PATTERN_ROUTE_PARAM.matcher(endPoint).find();
+        return Env.PATTERN_ROUTE_PARAM.matcher(endpoint).find();
     }
 
     public String getMethod() {
@@ -70,7 +51,7 @@ public class Route implements RouteInterface {
     }
 
     public String getUri() {
-        return endPoint;
+        return endpoint;
     }
 
     public Route setResponseAction(ResponseActionLambda action) {
