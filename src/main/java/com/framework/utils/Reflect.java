@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Reflect {
-    public static <T extends Object> T newInstance(Class<T> objectClass, Class<?>[] parameterTypes, Object... args) {
+    public static <T> T newInstance(Class<T> objectClass, Class<?>[] parameterTypes, Object... args) {
         T objectInstance = null;
 
         try {
@@ -19,7 +19,7 @@ public class Reflect {
         return objectInstance;
     }
 
-    public static <T extends Object> void fieldSetValue(T obj, String fieldName, Object value) {
+    public static <T> void fieldSetValue(T obj, String fieldName, Object value) {
         Field field = null;
 
         try {

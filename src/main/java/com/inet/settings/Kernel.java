@@ -10,13 +10,20 @@ import com.framework.contracts.KernelInterface;
 import com.framework.databases.Persist.PersistConnection;
 import com.framework.databases.Persist.table.Migration;
 import com.framework.databases.contracts.table.scheme.TableSchemeInterface;
-import com.framework.server.Router;
+import com.framework.server.router.Router;
 import com.framework.server.Server;
 import com.framework.utils.Reflect;
 import com.inet.app.routes.PublicRouter;
 
 public class Kernel implements KernelInterface {
 
+    //
+    //
+    // ###########################
+    // ##   Kernel Definitions  ##
+    // ###########################
+    //
+    //
     private final List<Class<? extends Router>> routersList = List.of(PublicRouter.class);
 
     private final List<Class<? extends Migration>> migrations = List.of(UsersMigrations.class);

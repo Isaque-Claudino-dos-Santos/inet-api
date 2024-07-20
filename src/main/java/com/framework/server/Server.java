@@ -2,6 +2,7 @@ package com.framework.server;
 
 import com.framework.server.contracts.ServerInterface;
 import com.framework.server.contracts.ServerRoutesInterface;
+import com.framework.server.router.ServerRoutes;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;

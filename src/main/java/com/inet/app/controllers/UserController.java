@@ -1,9 +1,10 @@
 package com.inet.app.controllers;
 
+import com.framework.server.response.modules.JsonResponse;
 import com.inet.app.dtos.user.CreateUserDTO;
 import com.inet.app.dtos.user.UpdateUserDTO;
 import com.framework.server.ServerRequest;
-import com.framework.server.ServerResponse;
+import com.framework.server.response.ServerResponse;
 import com.inet.app.models.User;
 import com.inet.app.models.data.UserData;
 import com.inet.app.resources.error.NotFoundResource;
@@ -12,20 +13,18 @@ import com.inet.app.resources.user.ShowUserResource;
 import com.inet.app.resources.user.UpdateUserResource;
 
 public class UserController {
-    private static Boolean responseUserNotFound(ServerResponse response, Integer id) {
-        return response
-                .setStatus(404)
-                .json(new NotFoundResource("user " + id + " not found"));
+    private static JsonResponse responseUserNotFound(ServerResponse response, Integer id) {
+        return response.json(new NotFoundResource("user " + id + " not found"), 404);
     }
 
-    public static Boolean index(ServerRequest request, ServerResponse response) {
+    public static JsonResponse index(ServerRequest request, ServerResponse response) {
         User user = new User();
         var users = user.all();
 
-        return response.json(users);
+        return response.json(users, 200);
     }
 
-    public static Boolean show(ServerRequest request, ServerResponse response) {
+    public static JsonResponse show(ServerRequest request, ServerResponse response) {
         Integer id = request.getParams().getInt("id");
 
         User user = new User();
@@ -36,20 +35,20 @@ public class UserController {
             return responseUserNotFound(response, id);
         }
 
-        return response.json(new ShowUserResource(userData));
+        return response.json(new ShowUserResource(userData), 200);
     }
 
-    public static Boolean store(ServerRequest request, ServerResponse response) {
+    public static JsonResponse store(ServerRequest request, ServerResponse response) {
         CreateUserDTO data = request.jsonBody(CreateUserDTO.class);
 
         User user = new User();
 
         UserData newUser = user.create(data);
 
-        return response.json(new CreateUserResource(newUser));
+        return response.json(new CreateUserResource(newUser), 201);
     }
 
-    public static Boolean destroy(ServerRequest request, ServerResponse response) {
+    public static JsonResponse destroy(ServerRequest request, ServerResponse response) {
         Integer id = request.getParams().getInt("id");
 
         User user = new User();
@@ -62,10 +61,10 @@ public class UserController {
 
         user.delete("id", id);
 
-        return response.noContent();
+        return response.json(null, 204);
     }
 
-    public static Boolean update(ServerRequest request, ServerResponse response) {
+    public static JsonResponse update(ServerRequest request, ServerResponse response) {
         Integer id = request.getParams().getInt("id");
 
         User user = new User();
@@ -80,7 +79,7 @@ public class UserController {
 
         UserData updatedUser = user.update("id", id, data);
 
-        return response.json(new UpdateUserResource(updatedUser));
+        return response.json(new UpdateUserResource(updatedUser), 200);
     }
 
 }

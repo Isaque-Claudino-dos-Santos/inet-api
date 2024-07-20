@@ -1,14 +1,12 @@
 package com.framework.server.contracts.lambdas;
 
 import com.framework.server.ServerRequest;
-import com.framework.server.ServerResponse;
+import com.framework.server.response.ServerResponse;
+import com.framework.server.response.modules.Response;
 
 public interface ResponseActionLambda {
     /**
      * Action on request
-     * 
-     * @param request
-     * @param response
      */
-    public Boolean execute(ServerRequest request, ServerResponse response);
+    public Response execute(ServerRequest request, ServerResponse response) throws Exception;
 }

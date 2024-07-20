@@ -1,12 +1,11 @@
 package com.framework.server.contracts;
 
 import com.framework.server.Middleware;
+import com.framework.server.contracts.lambdas.ResponseActionLambda;
 
 public interface RouterInterface {
     /**
      * Set server
-     * 
-     * @param server
      */
     public void setServer(ServerInterface server);
 
@@ -24,9 +23,16 @@ public interface RouterInterface {
 
     /**
      * Add new middleware in all routes
-     * 
-     * @param middleware
      */
-    public void middleware(Class<? extends Middleware> middleware);
+    public void middleware(Class<? extends Middleware>... classMiddlewares);
 
+    public void get(String uri, ResponseActionLambda action);
+
+    public void post(String uri, ResponseActionLambda action);
+
+    public void put(String uri, ResponseActionLambda action);
+
+    public void delete(String uri, ResponseActionLambda action);
+
+    public void patch(String uri, ResponseActionLambda action);
 }

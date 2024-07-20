@@ -1,0 +1,91 @@
+package com.framework.server.router;
+
+import java.io.IOException;
+import java.util.HashMap;
+
+import com.framework.server.Middleware;
+import com.framework.server.RouteMiddlewares;
+import com.framework.server.contracts.ServerRoutesInterface;
+import com.framework.server.response.ServerResponse;
+import com.framework.server.response.modules.Response;
+import com.framework.server.ServerRequest;
+import com.sun.net.httpserver.HttpExchange;
+
+public class ServerRoutes extends HashMap<String, Route> implements ServerRoutesInterface {
+    public ServerRoutes add(Route route) {
+        put(route.getId(), route);
+        return this;
+    }
+
+    public Boolean hasRoute(String key) {
+        return size() > 0 && containsKey(key);
+    }
+
+    public Boolean notHasRoute(String key) {
+        return !hasRoute(key);
+    }
+
+    private Route findRoute(String id) {
+        for (Route route : values()) {
+            if (route.idMatchWith(id)) {
+                return route;
+            }
+        }
+        return null;
+    }
+
+    public void handle(HttpExchange httpExchange) {
+        ServerRequest request = new ServerRequest(httpExchange);
+        ServerResponse response = new ServerResponse(httpExchange);
+
+        try {
+            String routeRequestId = Route.makeRouteId(request.getUri(), request.getMethod());
+            Route route = findRoute(routeRequestId);
+
+            if (route == null) {
+                response.json("Not found 404", 404).send();
+                return;
+            }
+
+            request.makeParams(route.getUri());
+
+            RouteMiddlewares middlewares = route.getMiddlewares();
+
+            while (middlewares.hasNext()) {
+                Middleware middleware = middlewares.next();
+
+                Response middlewareResponse = middleware.handle(request, response);
+
+                if (middlewareResponse != null) {
+                    middlewareResponse.send();
+                    middlewares.reset();
+                    return;
+                }
+
+                if (middleware.notShouldGoNext()) {
+                    break;
+                }
+            }
+
+            middlewares.reset();
+
+
+            Response routeResponse = route.getResponseAction().execute(request, response);
+
+            if (routeResponse != null) {
+                routeResponse.send();
+                return;
+            }
+
+            response.json(null, 204).send();
+
+        } catch (Exception exception) {
+            try {
+                response.json(exception.getMessage(), 500).send();
+            } catch (IOException exception1) {
+                exception1.printStackTrace();
+            }
+        }
+    }
+
+}
