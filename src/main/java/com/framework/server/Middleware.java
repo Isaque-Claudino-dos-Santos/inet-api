@@ -7,7 +7,7 @@ import com.framework.server.response.modules.Response;
 public abstract class Middleware implements MiddlewareInterface {
     private boolean goNext = false;
 
-    public abstract Response handle(ServerRequest request, ServerResponse response);
+    public abstract Response handle(ServerRequest request, ServerResponse response) throws Exception;
 
     public Response next() {
         goNext = true;

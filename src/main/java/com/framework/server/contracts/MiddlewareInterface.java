@@ -5,7 +5,7 @@ import com.framework.server.ServerRequest;
 import com.framework.server.response.ServerResponse;
 
 public interface MiddlewareInterface {
-    public Response handle(ServerRequest request, ServerResponse response);
+    public Response handle(ServerRequest request, ServerResponse response) throws Exception;
 
     public Response next();
 }
