@@ -1,6 +1,5 @@
 package com.framework.server;
 
-import com.framework.facades.Http;
 import com.framework.server.router.Route;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,14 +26,14 @@ class ServerTest {
         Route route = new Route("GET", "/", (req, res) -> res.json("Hello World", 200));
         server.getServerRoutes().add(route);
 
-        HttpClientRequest request = Http.get("http://localhost:3001" + "/").send();
+        HttpClientRequest request = new HttpClientRequest("GET", "http://localhost:3001/").send();
 
         assertEquals("Hello World", request.body(String.class));
     }
 
     @Test
     void must_return_not_found_on_not_setting_route() {
-        HttpClientRequest request = Http.get("http://localhost:3001" + "/").send();
+        HttpClientRequest request = new HttpClientRequest("GET", "http://localhost:3001/").send();
         assertEquals("Not found 404", request.body(String.class));
     }
 

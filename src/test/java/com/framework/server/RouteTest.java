@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RouteTest {
 
     @Test
-    void it_should_create_route_correctly() {
-        Route route = new Route("GET", "/", (req, res) -> res.json(null, 200));
+    void it_should_create_route_correctly() throws Exception {
+        Route route = new Route("GET", "/", (req, res) -> new JsonResponse());
 
         assertEquals("/-get", route.getId());
         assertEquals("GET", route.getMethod());
