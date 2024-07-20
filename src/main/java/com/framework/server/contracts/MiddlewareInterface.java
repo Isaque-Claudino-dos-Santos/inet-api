@@ -1,10 +1,11 @@
 package com.framework.server.contracts;
 
+import com.framework.server.response.modules.Response;
 import com.framework.server.ServerRequest;
-import com.framework.server.ServerResponse;
+import com.framework.server.response.ServerResponse;
 
 public interface MiddlewareInterface {
-    public Boolean handle(ServerRequest request, ServerResponse response);
+    public Response handle(ServerRequest request, ServerResponse response) throws Exception;
 
-    public Boolean next();
+    public Response next();
 }

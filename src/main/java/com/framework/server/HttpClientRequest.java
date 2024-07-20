@@ -9,7 +9,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
-public class Http {
+public class HttpClientRequest {
     private final Gson gson = new Gson();
     protected HttpRequest request = null;
     protected HttpRequest.Builder requestBuilder = null;
@@ -18,7 +18,7 @@ public class Http {
     protected URI uri = null;
     protected HttpRequest.BodyPublisher data = HttpRequest.BodyPublishers.ofString("");
 
-    public Http(String method, String url) {
+    public HttpClientRequest(String method, String url) {
         uri = URI.create(url);
         requestBuilder = HttpRequest.newBuilder(uri).method(method, data);
         client = HttpClient.newHttpClient();
@@ -27,7 +27,7 @@ public class Http {
     /**
      * Add header
      */
-    public Http header(String key, String value) {
+    public HttpClientRequest header(String key, String value) {
         requestBuilder.header(key, value);
         return this;
     }
@@ -35,7 +35,7 @@ public class Http {
     /**
      * Set timeout
      */
-    public Http timeout(Duration duration) {
+    public HttpClientRequest timeout(Duration duration) {
         requestBuilder.timeout(duration);
         return this;
     }
@@ -43,7 +43,7 @@ public class Http {
     /**
      * Set data to request
      */
-    public <D> Http data(D content) {
+    public <D> HttpClientRequest data(D content) {
         data = HttpRequest.BodyPublishers.ofString(gson.toJson(content));
         return this;
     }
@@ -51,7 +51,7 @@ public class Http {
     /**
      * Send request
      */
-    public Http send() {
+    public HttpClientRequest send() {
         try {
             request = requestBuilder.build();
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -64,10 +64,22 @@ public class Http {
     /**
      * Get body response
      */
-    public <T> T body(Class<T> modelClass) {
+    public <T> Object body(Class<T> modelClass) {
         if (response == null) return null;
 
-        return modelClass.equals(String.class) || modelClass.equals(Integer.class) || modelClass.equals(Boolean.class) ? (T) response.body() : gson.fromJson(response.body(), modelClass);
+        if (modelClass.equals(String.class)) {
+            return String.valueOf(response.body());
+        }
+
+        if (modelClass.equals(Integer.class)) {
+            return Integer.valueOf(response.body());
+        }
+
+        if (modelClass.equals(Boolean.class)) {
+            return Boolean.valueOf(response.body());
+        }
+
+        return gson.fromJson(response.body(), modelClass);
     }
 
     /**

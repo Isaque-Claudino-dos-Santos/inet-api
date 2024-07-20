@@ -26,5 +26,5 @@ public class Env {
     public final static String API_LANG = env.get("API_LANG", "en-us");
 
     // Patterns
-    public final static Pattern PATTERN_ROUTE_PARAM = Pattern.compile("\\{\\w*\\}", Pattern.MULTILINE);
+    public final static Pattern PATTERN_ROUTE_PARAM = Pattern.compile("\\{\\w*}", Pattern.MULTILINE);
 }
