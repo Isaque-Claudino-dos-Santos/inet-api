@@ -8,15 +8,11 @@ public interface MigrationInterface {
 
     /**
      * Instance new table scheme
-     * 
-     * @return
      */
     public TableSchemeInterface scheme();
 
     /**
      * Get all schemes
-     * 
-     * @return
      */
     public List<TableSchemeInterface> getSchemes();
 
