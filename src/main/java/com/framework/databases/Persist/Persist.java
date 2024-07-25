@@ -6,7 +6,6 @@ import com.framework.utils.ExceptionHandler;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.function.Consumer;
 
 public class Persist implements DBInterface {
     public final PersistConfig config = new PersistConfig();
@@ -34,27 +33,6 @@ public class Persist implements DBInterface {
         }
 
         return connection;
-    }
-
-    @Override
-    public void open(Consumer<Connection> handler) {
-        try {
-            connection = DriverManager.getConnection(config.getUrl(), config.getUserCredentials());
-
-            if (connection != null) {
-                handler.accept(connection);
-            }
-        } catch (SQLException exception) {
-            ExceptionHandler.print(exception);
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException exception) {
-                ExceptionHandler.print(exception);
-            }
-        }
     }
 
     @Override

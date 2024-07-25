@@ -144,91 +144,109 @@ public class PersistQueryStatement implements PersistQueryStatementInterface {
 
     @Override
     public <T> T last(Class<T> dataType) {
+        Connection connection = persist.open();
         T data = Reflect.newInstance(dataType, null);
 
-        persist.open(connection -> {
-            List<String> columns = query.getSelectedColumns();
+        List<String> columns = query.getSelectedColumns();
 
-            try {
-                PreparedStatement statement = connection.prepareStatement(query.getRaw(), Statement.RETURN_GENERATED_KEYS);
+        try {
+            PreparedStatement statement = connection.prepareStatement(query.getRaw(), Statement.RETURN_GENERATED_KEYS);
 
-                statement.execute();
+            statement.execute();
 
-                ResultSet result = statement.getResultSet();
+            ResultSet result = statement.getResultSet();
 
-                if (columns.isEmpty() || columns.getFirst().equals("*")) {
-                    columns = Arrays.stream(dataType.getFields()).map(Field::getName).toList();
-                }
+            if (columns.isEmpty() || columns.getFirst().equals("*")) {
+                columns = Arrays.stream(dataType.getFields()).map(Field::getName).toList();
+            }
 
-                while (result.next()) {
-                    if (!result.isLast()) {
-                        continue;
-                    }
-
+            while (result.next()) {
+                if (result.isLast()) {
                     for (String column : columns) {
                         Reflect.fieldSetValue(data, column, result.getObject(column));
                     }
-                }
-            } catch (SQLException exception) {
-                ExceptionHandler.print(exception);
-            }
-        });
 
-        return data;
+                    return data;
+                }
+            }
+        } catch (SQLException exception) {
+            ExceptionHandler.print(exception);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                ExceptionHandler.print(e);
+            }
+        }
+
+        return null;
     }
 
     @Override
     public <T> List<T> all(Class<T> dataType) {
+        Connection connection = persist.open();
         ArrayList<T> list = new ArrayList<>();
 
-        persist.open(connection -> {
-            List<String> columns = query.getSelectedColumns();
+        List<String> columns = query.getSelectedColumns();
 
-            try {
-                PreparedStatement statement = connection.prepareStatement(query.getRaw(), Statement.RETURN_GENERATED_KEYS);
+        try {
+            PreparedStatement statement = connection.prepareStatement(query.getRaw(), Statement.RETURN_GENERATED_KEYS);
 
-                statement.execute();
+            statement.execute();
 
-                ResultSet result = statement.getResultSet();
+            ResultSet result = statement.getResultSet();
 
-                if (columns.isEmpty() || columns.getFirst().equals("*")) {
-                    columns = Arrays.stream(dataType.getFields()).map(Field::getName).toList();
-                }
-
-                while (result.next()) {
-                    T data = Reflect.newInstance(dataType, null);
-
-                    for (String column : columns) {
-                        Reflect.fieldSetValue(data, column, result.getObject(column));
-                    }
-
-                    list.add(data);
-                }
-            } catch (SQLException exception) {
-                ExceptionHandler.print(exception);
+            if (columns.isEmpty() || columns.getFirst().equals("*")) {
+                columns = Arrays.stream(dataType.getFields()).map(Field::getName).toList();
             }
-        });
+
+            while (result.next()) {
+                T data = Reflect.newInstance(dataType, null);
+
+                for (String column : columns) {
+                    Reflect.fieldSetValue(data, column, result.getObject(column));
+                }
+
+                list.add(data);
+            }
+        } catch (SQLException exception) {
+            ExceptionHandler.print(exception);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                ExceptionHandler.print(e);
+            }
+        }
 
         return list;
     }
 
     @Override
     public void exec() {
-        persist.open(connection -> {
-            try {
-                PreparedStatement statement = connection.prepareStatement(query.getRaw(), Statement.RETURN_GENERATED_KEYS);
+        Connection connection = persist.open();
 
-                statement.execute();
+        try {
+            PreparedStatement statement = connection.prepareStatement(query.getRaw(), Statement.RETURN_GENERATED_KEYS);
 
-                ResultSet result = statement.getResultSet();
+            statement.execute();
 
-                while (result.next()) {
-                    System.out.println(result.getString("name"));
-                }
-            } catch (SQLException exception) {
-                ExceptionHandler.print(exception);
+            ResultSet result = statement.getResultSet();
+
+            while (result.next()) {
+                System.out.println(result.getString("name"));
             }
-        });
+        } catch (SQLException exception) {
+            ExceptionHandler.print(exception);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                ExceptionHandler.print(e);
+
+
+            }
+        }
     }
 
 
