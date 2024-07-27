@@ -4,10 +4,10 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import com.framework.server.contracts.ServerRequestInterface;
 import com.google.gson.Gson;
-import com.inet.settings.Env;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 
@@ -16,6 +16,7 @@ public class ServerRequest implements ServerRequestInterface {
     private final Headers headers;
     private final URI uri;
     public final ServerRequestParams params = new ServerRequestParams();
+    private final Pattern PATTERN_ROUTE_PARAM = Pattern.compile("\\{\\w*}", Pattern.MULTILINE);
 
     public ServerRequest(HttpExchange httpExchange) {
         this.httpExchange = httpExchange;

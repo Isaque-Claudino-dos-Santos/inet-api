@@ -17,7 +17,16 @@ public class Server implements ServerInterface {
     private InetSocketAddress address;
     private HttpServer server = null;
 
-    public Server(String host, Integer port) {
+    public void start() {
+        server.start();
+    }
+
+    public ServerRoutesInterface getServerRoutes() {
+        return routes;
+    }
+
+    @Override
+    public void configure(String host, Integer port) {
         try {
             this.host = InetAddress.getByName(host).getHostAddress();
             this.port = port;
@@ -28,28 +37,23 @@ public class Server implements ServerInterface {
             ExceptionHandler.print(e);
         }
     }
-
-
-    public void start() {
-        server.start();
-    }
-
-    public ServerRoutesInterface getServerRoutes() {
-        return routes;
-    }
-
+    
+    @Override
     public Integer getPort() {
         return port;
     }
 
+    @Override
     public String getHost() {
         return host;
     }
 
+    @Override
     public InetSocketAddress getAddress() {
         return address;
     }
 
+    @Override
     public HttpServer getServer() {
         return server;
     }
