@@ -5,18 +5,21 @@ import com.framework.server.contracts.lambdas.ResponseActionLambda;
 
 public interface RouterInterface {
     /**
-     * Set server
+     * Register router in server
      */
-    public void setServer(ServerInterface server);
+    public void registerRouterInServer();
 
     /**
-     * Method to override -
      * this method to register routes
      */
     public void registers();
 
     /**
-     * Method to override -
+     * alias from registers method
+     */
+    public void routes_registers();
+
+    /**
      * this method to register middlewares to all routes registered
      */
     public void middlewares_registers();
@@ -25,6 +28,8 @@ public interface RouterInterface {
      * Add new middleware in all routes
      */
     public void middleware(Class<? extends Middleware>... classMiddlewares);
+
+    public void request(String method, String uri, ResponseActionLambda action);
 
     public void get(String uri, ResponseActionLambda action);
 
