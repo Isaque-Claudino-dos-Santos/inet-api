@@ -1,6 +1,5 @@
 package com.framework.databases;
 
-import com.framework.databases.Persist.Persist;
 import com.framework.databases.Persist.PersistStatement;
 import com.framework.databases.contracts.ModelInterface;
 import com.framework.databases.contracts.PersistStatementInterface;
