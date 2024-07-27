@@ -26,15 +26,15 @@ public class TableSchemeColumns implements TableSchemeColumnsInterface {
     }
 
     public TableSchemeColumns autoIncrement() {
-        String column = columns.get(columns.size() - 1);
-        columns.remove(columns.size() - 1);
+        String column = columns.getLast();
+        columns.removeLast();
         columns.add(column + " AUTO_INCREMENT");
         return this;
     }
 
     public TableSchemeColumns primaryKey() {
-        String column = columns.get(columns.size() - 1);
-        columns.remove(columns.size() - 1);
+        String column = columns.getLast();
+        columns.removeLast();
         columns.add(column + " PRIMARY KEY");
         return this;
     }
@@ -46,8 +46,8 @@ public class TableSchemeColumns implements TableSchemeColumnsInterface {
     }
 
     public TableSchemeColumns nullable() {
-        String column = columns.get(columns.size() - 1);
-        columns.remove(columns.size() - 1);
+        String column = columns.getLast();
+        columns.removeLast();
         columns.add(column.replace(" NOT NULL", ""));
         return this;
     }
@@ -58,8 +58,8 @@ public class TableSchemeColumns implements TableSchemeColumnsInterface {
         return this;
     }
 
-    public String getColumnRaw() {
+    @Override
+    public String getRaw() {
         return String.join(", ", columns);
     }
-
 }

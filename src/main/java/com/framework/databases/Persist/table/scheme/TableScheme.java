@@ -4,35 +4,43 @@ import com.framework.databases.contracts.lambdas.TableSchemeLambda;
 import com.framework.databases.contracts.table.scheme.TableSchemeInterface;
 
 public class TableScheme implements TableSchemeInterface {
+    private final TableSchemeColumns tableSchemeColumns = new TableSchemeColumns();
     private String dataRaw;
     private String tableName;
-    private final TableSchemeColumns tableSchemeColumns;
 
-    public TableScheme() {
-        tableSchemeColumns = new TableSchemeColumns();
+    public static TableScheme build() {
+        return new TableScheme();
     }
 
-    public TableScheme create(String tableName, TableSchemeLambda schemeLambda) {
+    private void setTable(String table) {
+        this.tableName = table;
+    }
+
+    private void setRaw(String data) {
+        this.dataRaw = data;
+    }
+
+    public TableScheme create(String table, TableSchemeLambda schemeLambda) {
         schemeLambda.execute(tableSchemeColumns);
-        this.tableName = tableName;
-        dataRaw = "CREATE TABLE IF NOT EXISTS " + tableName + " (" + tableSchemeColumns.getColumnRaw() + ")";
+        setTable(table);
+        setRaw("CREATE TABLE IF NOT EXISTS " + tableName + " (" + tableSchemeColumns.getRaw() + ")");
         return this;
     }
 
-    public TableScheme delete(String tableName, TableSchemeLambda schemeLambda) {
+    public TableScheme delete(String table, TableSchemeLambda schemeLambda) {
         schemeLambda.execute(tableSchemeColumns);
-        this.tableName = tableName;
-        dataRaw = "DROP TABLE " + tableName + " (" + tableSchemeColumns.getColumnRaw() + ")";
+        setTable(table);
+        setRaw("DROP TABLE " + table + " (" + tableSchemeColumns.getRaw() + ")");
         return this;
     }
 
-    public TableSchemeInterface delete(String tableName) {
-        this.tableName = tableName;
-        dataRaw = "DROP TABLE " + tableName;
+    public TableSchemeInterface delete(String table) {
+        setTable(table);
+        setRaw("DROP TABLE " + tableName);
         return this;
     }
 
-    public String getDataRaw() {
+    public String getRaw() {
         return dataRaw;
     }
 
