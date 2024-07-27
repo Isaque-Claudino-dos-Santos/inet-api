@@ -13,7 +13,7 @@ public class Persist implements DBInterface {
     private static Persist instance = null;
 
 
-    protected Persist() {
+    public Persist() {
     }
 
     public static Persist getInstance() {

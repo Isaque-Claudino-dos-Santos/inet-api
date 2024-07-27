@@ -3,6 +3,7 @@ package com.framework.server;
 import com.framework.server.contracts.ServerInterface;
 import com.framework.server.contracts.ServerRoutesInterface;
 import com.framework.server.router.ServerRoutes;
+import com.framework.utils.ExceptionHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -16,19 +17,6 @@ public class Server implements ServerInterface {
     private InetSocketAddress address;
     private HttpServer server = null;
 
-    public Server(String host, Integer port) {
-        try {
-            this.host = InetAddress.getByName(host).getHostAddress();
-            this.port = port;
-            this.address = new InetSocketAddress(host, port);
-            server = HttpServer.create(address, 1);
-            server.createContext("/", routes);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
     public void start() {
         server.start();
     }
@@ -37,18 +25,35 @@ public class Server implements ServerInterface {
         return routes;
     }
 
+    @Override
+    public void configure(String host, Integer port) {
+        try {
+            this.host = InetAddress.getByName(host).getHostAddress();
+            this.port = port;
+            this.address = new InetSocketAddress(host, port);
+            server = HttpServer.create(address, 1);
+            server.createContext("/", routes);
+        } catch (IOException e) {
+            ExceptionHandler.print(e);
+        }
+    }
+    
+    @Override
     public Integer getPort() {
         return port;
     }
 
+    @Override
     public String getHost() {
         return host;
     }
 
+    @Override
     public InetSocketAddress getAddress() {
         return address;
     }
 
+    @Override
     public HttpServer getServer() {
         return server;
     }
