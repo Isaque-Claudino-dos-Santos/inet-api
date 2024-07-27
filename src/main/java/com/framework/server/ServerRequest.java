@@ -15,17 +15,13 @@ public class ServerRequest implements ServerRequestInterface {
     private final HttpExchange httpExchange;
     private final Headers headers;
     private final URI uri;
-    private final ServerRequestParams params = new ServerRequestParams();
+    public final ServerRequestParams params = new ServerRequestParams();
     private final Pattern PATTERN_ROUTE_PARAM = Pattern.compile("\\{\\w*}", Pattern.MULTILINE);
 
     public ServerRequest(HttpExchange httpExchange) {
         this.httpExchange = httpExchange;
         uri = httpExchange.getRequestURI();
         headers = httpExchange.getRequestHeaders();
-    }
-
-    private Boolean isParam(String part) {
-        return PATTERN_ROUTE_PARAM.matcher(part).matches();
     }
 
     public void makeParams(String routeUri) {
@@ -36,7 +32,7 @@ public class ServerRequest implements ServerRequestInterface {
             String routePart = routeParts[i];
             String requestPart = requestParts[i];
 
-            if (isParam(routePart)) {
+            if (Env.PATTERN_ROUTE_PARAM.matcher(routePart).matches()) {
                 String param = routePart.replace("{", "").replace("}", "");
                 params.put(param, requestPart);
             }
@@ -45,10 +41,6 @@ public class ServerRequest implements ServerRequestInterface {
 
     public Headers getHeaders() {
         return headers;
-    }
-
-    public ServerRequestParams getParams() {
-        return params;
     }
 
     public String getUri() {

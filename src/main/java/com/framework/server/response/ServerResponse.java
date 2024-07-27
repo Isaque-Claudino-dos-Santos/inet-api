@@ -3,6 +3,7 @@ package com.framework.server.response;
 import java.io.OutputStream;
 
 import com.framework.server.contracts.ServerResponseInterface;
+import com.framework.server.enums.StatusEnum;
 import com.framework.server.response.modules.JsonResponse;
 import com.framework.server.response.modules.CsvResponse;
 import com.framework.server.response.factories.ResponseFactory;
@@ -23,6 +24,17 @@ public class ServerResponse implements ServerResponseInterface {
     @Override
     public CsvResponse csv(String data, Integer status) {
         return responseFactory.createCsvResponse(data, status);
+    }
+
+    @Override
+    public CsvResponse csv(String data, StatusEnum status) {
+        return responseFactory.createCsvResponse(data, status.value);
+    }
+
+    @Override
+    public JsonResponse json(Object data, StatusEnum status) {
+        return responseFactory.createJsonResponse(data, status.value);
+
     }
 
     @Override
