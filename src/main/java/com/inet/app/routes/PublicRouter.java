@@ -12,6 +12,11 @@ public class PublicRouter extends Router {
         get("/users/{id}", UserController::show);
         put("/users/{id}", UserController::update);
         delete("/users/{id}", UserController::destroy);
+
+        get("/", (_, res) -> {
+            String data = System.getProperty("user.dir");
+            return res.json(data, 200);
+        });
     }
 
     public void middlewares_registers() {
