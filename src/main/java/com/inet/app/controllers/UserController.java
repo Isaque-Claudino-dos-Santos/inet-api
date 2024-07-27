@@ -1,5 +1,6 @@
 package com.inet.app.controllers;
 
+import com.framework.server.enums.StatusEnum;
 import com.framework.server.response.modules.JsonResponse;
 import com.framework.server.ServerRequest;
 import com.framework.server.response.ServerResponse;
@@ -14,18 +15,12 @@ public class UserController {
     }
 
     public static JsonResponse show(ServerRequest request, ServerResponse response) {
+        Integer userId = request.params.getInt("id");
         User user = new User();
 
-        // statement -> queryStatement -> update -> queryStatement -> exec
-        // statement -> queryStatement -> select -> queryStatement -> exec
-        // statement -> queryStatement -> where -> queryStatement -> where -> queryStatement -> exec
+        var data = user.statement().select().getById(userId, UserData.class);
 
-        var data = user
-                .statement()
-                .select()
-                .getById(3, UserData.class);
-
-        return response.json(data, 200);
+        return response.json(data, StatusEnum.INTERNAL_ERROR);
     }
 
     public static JsonResponse store(ServerRequest request, ServerResponse response) {

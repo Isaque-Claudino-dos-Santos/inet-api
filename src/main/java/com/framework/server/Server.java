@@ -3,6 +3,7 @@ package com.framework.server;
 import com.framework.server.contracts.ServerInterface;
 import com.framework.server.contracts.ServerRoutesInterface;
 import com.framework.server.router.ServerRoutes;
+import com.framework.utils.ExceptionHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class Server implements ServerInterface {
             server = HttpServer.create(address, 1);
             server.createContext("/", routes);
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionHandler.print(e);
         }
     }
 
