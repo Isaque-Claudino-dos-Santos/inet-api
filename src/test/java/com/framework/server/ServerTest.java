@@ -12,7 +12,8 @@ class ServerTest {
 
     @BeforeAll
     public static void before_all_start_server() {
-        server = new Server("localhost", 3001);
+        server = new Server();
+        server.configure("localhost", 3001);
         server.start();
     }
 

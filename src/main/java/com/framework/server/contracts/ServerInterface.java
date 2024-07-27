@@ -5,6 +5,10 @@ import com.sun.net.httpserver.HttpServer;
 import java.net.InetSocketAddress;
 
 public interface ServerInterface {
+    /**
+     * configuration host, port and routes
+     */
+    public void configure(String host, Integer port);
 
     /**
      * Get server port

@@ -4,7 +4,6 @@ import com.framework.databases.Model;
 import com.framework.databases.Persist.Persist;
 import com.framework.databases.Persist.PersistStatement;
 import com.framework.databases.Persist.table.Migration;
-import com.inet.settings.Env;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -20,14 +19,6 @@ public class PersistTest {
     @BeforeAll
     static void configure_database() {
         persist = Persist.getInstance();
-        persist.config.set(
-                Env.DB_USER,
-                Env.DB_PASSWORD,
-                Env.DB_HOST,
-                Env.DB_PORT,
-                "unit-tests",
-                Env.DB_DRIVES
-        );
 
         migration = new Migration() {
             @Override
