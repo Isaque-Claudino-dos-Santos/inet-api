@@ -1,15 +1,10 @@
 package com.framework.databases.contracts;
 
-public interface DBInterface {
-    /**
-     * Data base connection
-     * @return
-     */
-    public DBConnectionInterface connection();
+import java.sql.Connection;
+import java.sql.SQLException;
 
-    /**
-     * Make sql query string
-     * @return
-     */
-    public DBQueryInterface query();
+public interface DBInterface {
+    public Connection open() throws SQLException;
+
+    public void close() throws SQLException;
 }

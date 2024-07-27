@@ -11,7 +11,7 @@ public abstract class Migration implements MigrationInterface {
     private final List<TableSchemeInterface> schemes = new ArrayList<>();
 
     public TableScheme scheme() {
-        TableScheme tableScheme = new TableScheme();
+        TableScheme tableScheme = TableScheme.build();
         schemes.add(tableScheme);
         return tableScheme;
     }

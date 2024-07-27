@@ -1,15 +1,11 @@
 package com.inet.settings;
 
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
-
-import com.inet.app.App;
+import com.framework.databases.Persist.Persist;
+import com.framework.databases.Persist.PersistStatement;
 import com.inet.app.databases.migrations.UsersMigrations;
-import com.framework.contracts.KernelInterface;
-import com.framework.databases.Persist.PersistConnection;
+import com.framework.databases.Persist.table.scheme.contracts.KernelInterface;
 import com.framework.databases.Persist.table.Migration;
-import com.framework.databases.contracts.table.scheme.TableSchemeInterface;
 import com.framework.server.router.Router;
 import com.framework.server.Server;
 import com.framework.utils.Reflect;
@@ -36,35 +32,20 @@ public class Kernel implements KernelInterface {
     //
     //
     private final Server server;
+    private final Persist persist = Persist.getInstance();
 
     public Kernel(Server server) {
         this.server = server;
     }
 
     public void __run_up_migrations__() {
-        PersistConnection connection = App.mysql.connection();
-
-        connection.open();
-
         migrations.forEach((migrationClass) -> {
             Migration migration = Reflect.newInstance(migrationClass, null);
 
             migration.up();
 
-            List<TableSchemeInterface> schemes = migration.getSchemes();
-
-            schemes.forEach((scheme) -> {
-                Statement statement = connection.createStatement();
-
-                try {
-                    statement.execute(scheme.getDataRaw());
-                } catch (SQLException exception) {
-                    exception.printStackTrace();
-                }
-            });
+            migration.getSchemes().forEach(PersistStatement::simpleExecution);
         });
-
-        connection.open();
     }
 
     public void __initialize_routers__() {
