@@ -3,6 +3,7 @@ package com.framework.utils;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,14 +45,15 @@ public class Reflect {
     ;
 
     public static List<Field> getFields(Object obj) {
+        List<Field> fields = new ArrayList<>();
 
         try {
-            return Arrays.asList(obj.getClass().getDeclaredFields());
+            fields = Arrays.asList(obj.getClass().getDeclaredFields());
         } catch (Exception exception) {
             exception.printStackTrace();
         }
 
-        return null;
+        return fields;
     }
 
     ;

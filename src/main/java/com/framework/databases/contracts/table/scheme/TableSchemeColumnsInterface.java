@@ -1,6 +1,8 @@
 package com.framework.databases.contracts.table.scheme;
 
-public interface TableSchemeColumnsInterface {
+import com.framework.databases.contracts.Rawlable;
+
+public interface TableSchemeColumnsInterface extends Rawlable {
     public void id();
 
     public TableSchemeColumnsInterface string(String column, Integer size);
@@ -16,6 +18,4 @@ public interface TableSchemeColumnsInterface {
     public TableSchemeColumnsInterface nullable();
 
     public TableSchemeColumnsInterface unique();
-
-    public String getColumnRaw();
 }
