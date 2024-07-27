@@ -32,7 +32,7 @@ public class ServerRequest implements ServerRequestInterface {
             String routePart = routeParts[i];
             String requestPart = requestParts[i];
 
-            if (Env.PATTERN_ROUTE_PARAM.matcher(routePart).matches()) {
+            if (PATTERN_ROUTE_PARAM.matcher(routePart).matches()) {
                 String param = routePart.replace("{", "").replace("}", "");
                 params.put(param, requestPart);
             }
