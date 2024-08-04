@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.inet</groupId>
-    <artifactId>inet</artifactId>
+    <artifactId>inet-api</artifactId>
     <version>1.0.0</version>
 
     <properties>
