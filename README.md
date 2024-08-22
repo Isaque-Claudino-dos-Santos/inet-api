@@ -21,3 +21,18 @@ Rodar todos
 ```bash
 mvn test
 ```
+
+### Features
+- rotas
+- rotas middlewares
+- rotas parametrizadas
+- controladores
+- kernel da aplicação
+- class para inicializar a aplicação
+- conexão com banca de dados
+
+### TO-DO Features
+- models
+- migrations
+- server socket
+- powershell process
