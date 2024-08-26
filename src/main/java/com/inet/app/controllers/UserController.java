@@ -6,6 +6,7 @@ import com.framework.server.annotations.Route;
 import com.framework.server.response.modules.JsonResponse;
 import com.framework.server.ServerRequest;
 import com.framework.server.response.ServerResponse;
+import com.framework.utils.ExceptionHandler;
 import com.inet.app.middlewares.AuthMiddleware;
 import com.inet.app.models.User;
 import com.inet.app.models.data.UserData;
@@ -20,13 +21,20 @@ public class UserController {
         return response.json("TO IMPLEMENTATION", 500);
     }
 
+    @Route(method = "GET", uri = "/user/{id}")
     public static JsonResponse show(ServerRequest request, ServerResponse response) {
-        Integer userId = request.params.getInt("id");
-        User user = new User();
+        try {
 
-        var data = user.statement().select().getById(userId, UserData.class);
+            Integer userId = request.params.getInt("id");
+            User user = new User();
 
-        return response.json(data, StatusEnum.INTERNAL_ERROR);
+            var data = user.statement().select().getById(userId, UserData.class);
+
+            return response.json(data, StatusEnum.INTERNAL_ERROR);
+        }catch (Exception exception) {
+            ExceptionHandler.print(exception);
+            return null;
+        }
     }
 
     public static JsonResponse store(ServerRequest request, ServerResponse response) {

@@ -1,8 +1,6 @@
 package com.inet.app.models;
 
 import com.framework.databases.Model;
-import com.inet.app.models.data.UserData;
-
 import java.util.List;
 
 public class User extends Model {

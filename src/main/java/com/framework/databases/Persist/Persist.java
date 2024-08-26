@@ -2,27 +2,14 @@ package com.framework.databases.Persist;
 
 import com.framework.databases.contracts.DBInterface;
 import com.framework.utils.ExceptionHandler;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class Persist implements DBInterface {
-    public final PersistConfig config = new PersistConfig();
+    public final PersistConfig config = PersistConfig.getInstance();
     private Connection connection = null;
-    private static Persist instance = null;
-
-
-    public Persist() {
-    }
-
-    public static Persist getInstance() {
-        if (instance == null) {
-            instance = new Persist();
-        }
-
-        return instance;
-    }
 
     @Override
     public Connection open() {
@@ -38,7 +25,7 @@ public class Persist implements DBInterface {
     @Override
     public void close() {
         try {
-            if (connection == null || connection.isClosed()) return;
+            if (Objects.isNull(connection) || connection.isClosed()) return;
 
             connection.close();
         } catch (SQLException | NullPointerException exception) {

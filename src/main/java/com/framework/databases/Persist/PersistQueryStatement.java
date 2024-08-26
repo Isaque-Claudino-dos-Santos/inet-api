@@ -14,7 +14,6 @@ import java.util.List;
 public class PersistQueryStatement implements PersistQueryStatementInterface {
     public static final String DESC = "desc";
     public static final String ASC = "asc";
-    private final Persist persist = Persist.getInstance();
     private final PersistQueryStringBuilder query;
     private final Model model;
 
@@ -55,11 +54,12 @@ public class PersistQueryStatement implements PersistQueryStatementInterface {
 
     @Override
     public <T> T getById(Object value, Class<T> dataType) {
+        Persist persist = new Persist();
+        Connection connection = null;
+
         T data = Reflect.newInstance(dataType, null);
 
         query.where(model.primaryKey(), "=", value);
-
-        Connection connection = null;
 
         try {
             connection = persist.open();
@@ -86,13 +86,7 @@ public class PersistQueryStatement implements PersistQueryStatementInterface {
         } catch (SQLException exception) {
             ExceptionHandler.print(exception);
         } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException exception1) {
-                ExceptionHandler.print(exception1);
-            }
+          persist.close();
         }
 
         return null;
@@ -100,14 +94,14 @@ public class PersistQueryStatement implements PersistQueryStatementInterface {
 
     @Override
     public <T> T first(Class<T> dataType) {
+        Persist persist = new Persist();
+        Connection connection = persist.open();
+
         T data = Reflect.newInstance(dataType, null);
 
         List<String> columns = query.getSelectedColumns();
-        Connection connection = null;
 
         try {
-            connection = persist.open();
-
             PreparedStatement statement = connection.prepareStatement(query.getRaw(), Statement.RETURN_GENERATED_KEYS);
 
             statement.execute();
@@ -128,13 +122,7 @@ public class PersistQueryStatement implements PersistQueryStatementInterface {
         } catch (SQLException exception) {
             ExceptionHandler.print(exception);
         } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException exception) {
-                ExceptionHandler.print(exception);
-            }
+            persist.close();
         }
 
         return data;
@@ -142,6 +130,7 @@ public class PersistQueryStatement implements PersistQueryStatementInterface {
 
     @Override
     public <T> T last(Class<T> dataType) {
+        Persist persist = new Persist();
         Connection connection = persist.open();
         T data = Reflect.newInstance(dataType, null);
 
@@ -170,11 +159,7 @@ public class PersistQueryStatement implements PersistQueryStatementInterface {
         } catch (SQLException exception) {
             ExceptionHandler.print(exception);
         } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                ExceptionHandler.print(e);
-            }
+            persist.close();
         }
 
         return null;
@@ -182,7 +167,9 @@ public class PersistQueryStatement implements PersistQueryStatementInterface {
 
     @Override
     public <T> List<T> all(Class<T> dataType) {
+        Persist persist = new Persist();
         Connection connection = persist.open();
+
         ArrayList<T> list = new ArrayList<>();
 
         List<String> columns = query.getSelectedColumns();
@@ -210,11 +197,7 @@ public class PersistQueryStatement implements PersistQueryStatementInterface {
         } catch (SQLException exception) {
             ExceptionHandler.print(exception);
         } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                ExceptionHandler.print(e);
-            }
+            persist.close();
         }
 
         return list;
@@ -222,6 +205,7 @@ public class PersistQueryStatement implements PersistQueryStatementInterface {
 
     @Override
     public void exec() {
+        Persist persist = new Persist();
         Connection connection = persist.open();
 
         try {
@@ -237,13 +221,7 @@ public class PersistQueryStatement implements PersistQueryStatementInterface {
         } catch (SQLException exception) {
             ExceptionHandler.print(exception);
         } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                ExceptionHandler.print(e);
-
-
-            }
+            persist.close();
         }
     }
 

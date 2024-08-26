@@ -11,10 +11,10 @@ import com.framework.utils.Reflect;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PersistStatement implements PersistStatementInterface {
-    private final Persist persist = Persist.getInstance();
-    private PersistQueryStringBuilder query = null;
+    private PersistQueryStringBuilder query;
     private final Model model;
 
     public PersistStatement(Model model) {
@@ -22,7 +22,7 @@ public class PersistStatement implements PersistStatementInterface {
     }
 
     private void setQueryString() {
-        if (query == null) {
+        if (Objects.isNull(query)) {
             query = PersistQueryStringBuilder.build();
         }
     }
@@ -48,20 +48,19 @@ public class PersistStatement implements PersistStatementInterface {
 
     @Override
     public PersistQueryStatementInterface update(List<String> columns, Object data) {
+        Persist persist = new Persist();
+        Connection connection = persist.open();
+
         setQueryString();
 
         List<Object> values = new ArrayList<>();
 
-        for (String column : columns) {
-            values.add(Reflect.getFieldValue(data, column, data));
-        }
+        columns.forEach((column) -> values.add(Reflect.getFieldValue(data, column, data)));
 
         query.update(model.table(), columns, values);
 
-        try (Connection connection = persist.open()) {
-
+        try {
             connection.createStatement().execute(query.getRaw());
-
         } catch (SQLException exception) {
             ExceptionHandler.print(exception);
         } finally {
@@ -74,14 +73,13 @@ public class PersistStatement implements PersistStatementInterface {
 
     @Override
     public PersistQueryStatementInterface create(Object data) {
-        if (data == null) return null;
+        if (Objects.isNull(data)) return null;
 
         setQueryString();
         List<String> column = List.of();
         List<Object> values = List.of();
 
         query.insert(model.table(), column, values);
-
 
         return newPersistQueryStatement();
     }
@@ -94,26 +92,18 @@ public class PersistStatement implements PersistStatementInterface {
     }
 
     public static void simpleExecution(Rawlable rawlable) {
-        Persist persist = Persist.getInstance();
+        Persist persist = new Persist();
+        Connection connection = persist.open();
         String query = rawlable.getRaw();
 
-        if (persist == null || query == null) return;
-
-        Connection connection = null;
+        if (Objects.isNull(query)) return;
 
         try {
-            connection = persist.open();
             connection.prepareStatement(query).execute();
         } catch (SQLException exception) {
             ExceptionHandler.print(exception);
-
-            try {
-                connection.close();
-            } catch (SQLException exception1) {
-                ExceptionHandler.print(exception1);
-            }
+        } finally {
+            persist.close();
         }
     }
-
-
 }
